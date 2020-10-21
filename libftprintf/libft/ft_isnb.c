@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   ft_isnb.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/20 13:00:11 by aguiller          #+#    #+#             */
-/*   Updated: 2020/09/07 17:04:42 by alexzudin        ###   ########.fr       */
+/*   Created: 2020/08/20 16:24:23 by alexzudin         #+#    #+#             */
+/*   Updated: 2020/10/21 12:30:35 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_isdigit(int c)
+int		ft_isnb(char *a)
 {
-	if ((unsigned int)c >= '0' && (unsigned int)c <= '9')
-		return (1);
-	return (0);
+	int i;
+
+	i = 0;
+	while (a[i] != '\0')
+	{
+		if (ft_isdigit(a[i]) == 0)
+			return (-1);
+		i++;
+	}
+	return (1);
 }

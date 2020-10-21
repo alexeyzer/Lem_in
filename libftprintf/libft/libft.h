@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/06 22:55:46 by aguiller          #+#    #+#             */
-/*   Updated: 2020/06/15 10:51:01 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/10/15 18:23:39 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,14 @@
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <sys/types.h>
+# include <sys/uio.h>
+# define BUFF_SIZE 1
 
+int					get_next_line(const int fd, char **line);
+int					crstr(char **line, char *bufer, int status);
+char				*ft_strjoins(char const *s1, char const *s2);
+char				*ft_strdups(const char *s1);
 void				ft_bzero(void *s, size_t n);
 void				*ft_memmove(void *dst, const void *src, size_t len);
 void				*ft_memccpy(void *destination,
@@ -39,8 +46,9 @@ char				*ft_strnstr(const char *haystack,
 	const char *needle, size_t len);
 int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
-int					ft_atoi(const char *str);
+long double			ft_atoi(const char *str);
 int					ft_isalpha(int c);
+int					ft_isnb(char *a);
 int					ft_isdigit(int c);
 int					ft_isalnum(int c);
 int					ft_isascii(int c);

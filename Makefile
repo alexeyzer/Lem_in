@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRC = main.c 
+SRC = main.c parsing.c work_withstruct.c parsing_p2.c func.c validation.c
 
 SRC_DIR = src/
 
@@ -21,7 +21,7 @@ LIB_H =	-I libftprintf/libft/
 
 SRCS=$(addprefix $(SRC_DIR), $(SRC))
 
-NAME = Lem_in
+NAME = Lem-in
 
 OBJ = $(SRCS:%.c=%.o)
 
@@ -34,13 +34,12 @@ $(NAME): $(OBJ)
 
 
 %.o:%.c
-	gcc -Wall -Wextra -Werror $(LEM_IN_H) $(PRINTF_H) $(LIB_H) -c $< -o $@
+	gcc -Wall -Wextra -ggdb -Werror $(LEM_IN_H) $(PRINTF_H) $(LIB_H) -c $< -o $@
 
 clean:
 	@cd libftprintf && $(MAKE) clean	
 	@/bin/rm -f $(OBJ)
-	@/bin/rm libftprintf.a
-	@/bin/rm -f test
+	@/bin/rm -f libftprintf.a
 
 fclean: clean
 	@cd libftprintf && $(MAKE) fclean
