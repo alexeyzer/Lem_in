@@ -12,31 +12,31 @@
 
 #include "lem_in.h"
 
-void isvalid(t_lemin *lemin)
+void isvalid(t_lemin **lemin)
 {
-	if (lemin->start == NULL || lemin->end == NULL)
-		exitlem(&lemin, "Error no start or end", NULL);
+	if ((*lemin)->start == NULL || (*lemin)->end == NULL)
+		exitlem(lemin, "Error no start or end", NULL);
 	findpathtoend(lemin);
 }
 
-void findpathtoend(t_lemin *lemin)
+void findpathtoend(t_lemin **lemin)
 {
 	int *massive;
 	int i;
 	
 	massive = NULL;
-	massive = (int*)(malloc(sizeof(int) * lemin->rooms_count));
+	massive = (int*)(malloc(sizeof(int) * (*lemin)->rooms_count));
 	i = 0;
-	while (i < lemin->rooms_count)
+	while (i < (*lemin)->rooms_count)
 	{
 		massive[i] = 0;
 		i++;
 	}
-	massive[lemin->start->index] = 1;
-	if (find(&massive, lemin->start->index, lemin) == 0)
+	massive[(*lemin)->start->index] = 1;
+	if (find(&massive, (*lemin)->start->index, *lemin) == 0)
 	{
 		free(massive);
-		exitlem(&lemin, "Error no path from start to end", NULL);
+		exitlem(lemin, "Error no path from start to end", NULL);
 	}
 	free(massive);
 }
@@ -44,8 +44,10 @@ void findpathtoend(t_lemin *lemin)
 int find(int **massive, int index, t_lemin *lemin)
 {
 	int i;
+	int result;
 
 	i = 0;
+	result = 0;
 	while (i < lemin->rooms_count)
 	{
 		if (lemin->mass[index][i] == 1 && (*massive)[i] == 0)
@@ -55,10 +57,10 @@ int find(int **massive, int index, t_lemin *lemin)
 			else
 			{
 				(*massive)[i] = 1;
-				return (find(massive, i, lemin));
+				result = result + find(massive, i, lemin);
 			}
 		}
 		i++;
 	}
-	return (0);
+	return (result);
 }

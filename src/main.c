@@ -6,7 +6,7 @@ t_lemin *init_lemin()
     t_lemin *lemin;
 
     lemin = NULL;
-    if (!(lemin=malloc(sizeof(t_lemin))))
+    if (!(lemin=(t_lemin*)malloc(sizeof(t_lemin))))
         return (NULL);
     lemin->ants_count = 0;
     lemin->rooms_count = 0;
@@ -22,11 +22,9 @@ int main(int argc, char **argv)
 {
     int fd;
     t_lemin *lemin;
-    char *line;
 
     lemin = NULL;
     fd = 0;
-    line = NULL;
     if (argc == 2)
     {
         fd = open(argv[1], O_RDONLY);
@@ -37,18 +35,20 @@ int main(int argc, char **argv)
         }
     }
     lemin = init_lemin();
-    parsing(fd, lemin);
-    isvalid(lemin);
+    parsing(fd, &lemin);
+    //visual(lemin);
+    isvalid(&lemin);
+    ft_printf("no erro");
+    exitlem(&lemin, NULL, NULL);
     return (0);
 }
 
-void    exitlem(t_lemin **lemin, char *str, char *str_tofree)
+void    exitlem(t_lemin **lemin, char *str, char **str_tofree)
 {
     t_room *head;
 
     head = NULL;
-    if (str_tofree != NULL)
-        free(str_tofree);
+    ft_strdel(str_tofree);
     if (str != NULL)
         ft_printf("%s", str);
     if (*lemin != NULL)
@@ -73,6 +73,34 @@ void c_clear(t_room *head)
         c_clear(head->next);
         head->next = NULL;
     }
+    ft_strdel(&(head->name));
     free(head);
     head = NULL;
+}
+
+void visual(t_lemin *lemin)
+{
+    int i;
+    int j;
+
+    i = 0;
+    while (i < lemin->rooms_count)
+    {
+        ft_printf("[%d] ", i);
+        i++;
+    }
+    ft_printf("\n");
+    i = 0;
+    while (i < lemin->rooms_count)
+    {
+        j = 0;
+        ft_printf("[%d] ", i);
+        while (j < lemin->rooms_count)
+        {
+            ft_printf("%d ", lemin->mass[i][j]);
+            j++;
+        }
+        ft_printf("\n");
+        i++;
+    }
 }

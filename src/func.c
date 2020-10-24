@@ -26,7 +26,7 @@ void clearmass(int **mass, int count)
 	mass = NULL;
 }
 
-void initmass(t_lemin *lemin)
+void initmass(t_lemin **lemin)
 {
     int **massive;
     int i;
@@ -35,27 +35,27 @@ void initmass(t_lemin *lemin)
     i = 0;
 	j = 0;
     massive = NULL;
-    massive = (int**)malloc(sizeof(int*) * lemin->rooms_count);
-    while (i < lemin->rooms_count)
+    massive = (int**)malloc(sizeof(int*) * (*lemin)->rooms_count);
+    while (i < (*lemin)->rooms_count)
     {
-        massive[i] = (int*)malloc(sizeof(int) * lemin->rooms_count);
+        massive[i] = (int*)malloc(sizeof(int) * (*lemin)->rooms_count);
         i++;
     }
 	i = 0;
-	while (i < lemin->rooms_count)
+	while (i < (*lemin)->rooms_count)
 	{
 		j = 0;
-		while (j < lemin->rooms_count)
+		while (j < (*lemin)->rooms_count)
 		{
 			massive[i][j] = 0;
 			j++;
 		}
 		i++;
 	}
-    lemin->mass = massive;
+    (*lemin)->mass = massive;
 }
 
-void addconnect(t_lemin *lemin, char *str)
+void addconnect(t_lemin **lemin, char *str)
 {
 	int i;
 	int index1;
@@ -66,18 +66,19 @@ void addconnect(t_lemin *lemin, char *str)
 		i++;
 	index1 = getindex(lemin, str);
 	index2 = getindex(lemin, str + i + 1);
-	lemin->mass[index1][index2] = 1;
-	lemin->mass[index2][index1] = 1;
+	
+	(*lemin)->mass[index1][index2] = 1;
+	(*lemin)->mass[index2][index1] = 1;
 }
 
 
-int getindex(t_lemin *lemin, char *str)
+int getindex(t_lemin **lemin, char *str)
 {
 	t_room *rooms;
 	int i;
 
 	i = 0;
-	rooms = lemin->rooms;
+	rooms = (*lemin)->rooms;
 	while (str[i] && str[i] != '-')
 		i++;
 	while (rooms != NULL)
@@ -89,28 +90,31 @@ int getindex(t_lemin *lemin, char *str)
 	return (-1);
 }
 
-void antscheck(int fd, char **line, t_lemin *lemin)
+void antscheck(int fd, char **line, t_lemin **lemin)
 {
-	while(get_next_line(fd, line))
+	while (get_next_line(fd, &(*line)))
 	{
 		if (*line == NULL || **line == '\0')
-			exitlem(&lemin, "Error\n", *line);
+			exitlem(lemin, "Error\n", line);
 		if ((*line)[0] == '#' && (*line)[1] != '#')
-			continue;
+			ft_strdel(line);
 		else if (ft_strcmp(*line, "##start") == 0)
-			exitlem(&lemin, "Error no ants\n", *line);
+			exitlem(lemin, "Error no ants\n", line);
 		else if (ft_strcmp(*line, "##end") == 0)
-			exitlem(&lemin, "Error no ants\n", *line);
+			exitlem(lemin, "Error no ants\n", line);
 		else if ((*line)[0] == '#' && (*line)[1] == '#')
-			continue;
+			ft_strdel(line);
 		else if	(ft_isnb(*line) > 0)
 			break;
-		free(*line);
+		ft_strdel(line);
 	}
+	if (*line == NULL || **line == '\0')
+		exitlem(lemin, "Error\n", line);
 	if (ft_isnb(*line) < 0)
-		exitlem(&lemin, "Error, no ants\n", *line);
+		exitlem(lemin, "Error with ants\n", line);
 	else
-		lemin->ants_count = ft_atoi(*line);
-	if (**line)
-		free(*line);
+		(*lemin)->ants_count = ft_atoi(*line);
+	if ((*lemin)->ants_count <= 0 || (*lemin)->ants_count > 2147483647)
+		exitlem(lemin, "Error with ants\n", line);
+	ft_strdel(line);
 }
