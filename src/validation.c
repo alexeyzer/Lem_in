@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 15:21:51 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/10/21 19:33:21 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/10/25 18:40:23 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,8 @@ void isvalid(t_lemin **lemin)
 void findpathtoend(t_lemin **lemin)
 {
 	int *massive;
-	int i;
 	
-	massive = NULL;
-	massive = (int*)(malloc(sizeof(int) * (*lemin)->rooms_count));
-	i = 0;
-	while (i < (*lemin)->rooms_count)
-	{
-		massive[i] = 0;
-		i++;
-	}
-	massive[(*lemin)->start->index] = 1;
+	massive = massvisited(*lemin);
 	if (find(&massive, (*lemin)->start->index, *lemin) == 0)
 	{
 		free(massive);
@@ -63,4 +54,22 @@ int find(int **massive, int index, t_lemin *lemin)
 		i++;
 	}
 	return (result);
+}
+
+int		*massvisited(t_lemin *lemin)
+{
+	int i;
+	int *massive;
+
+	massive = NULL;
+	if (!(massive = (int*)(malloc(sizeof(int) * lemin->rooms_count))))
+		return (NULL);
+	i = 0;
+	while (i < lemin->rooms_count)
+	{
+		massive[i] = 0;
+		i++;
+	}
+	massive[lemin->start->index] = 1;
+	return (massive);
 }

@@ -16,6 +16,35 @@ typedef struct	s_room
 	
 }				t_room;
 
+typedef struct	s_path
+{
+	int					from;
+	int					to;
+	struct	s_path		*next;
+}				t_path;
+
+typedef struct	s_pathsolver
+{
+	int					index;
+	int					len_path;
+	struct	s_path		*path;
+	struct	s_pathtosolve	*pathtosolve;
+	
+}				t_pathsolver;
+
+typedef struct	s_pathtosolve
+{
+	struct	s_pathsolver	*path_solver;
+	struct	s_pathtosolve		*next;
+}				t_pathtosolve;
+
+typedef struct	s_queue
+{
+	struct	s_pathsolver	*path_solver;
+	struct	s_queue			*next;
+}				t_queue;
+
+
 typedef struct	s_lemin
 {
 	struct	s_room	*rooms;
@@ -53,6 +82,26 @@ int		find(int **massive, int index, t_lemin *lemin);
 void	findpathtoend(t_lemin **lemin);
 void	antscheck(int fd, char **line, t_lemin **lemin);
 void	visual(t_lemin *lemin);
+int		*massvisited(t_lemin *lemin);
+t_pathsolver	*createpathsolver(int index);
+void			solv(t_lemin *lemin);
+t_queue			*createqueue();
+void			queueadd(t_queue	*quary, t_pathsolver *pathsolver);
+t_pathtosolve	*createpathtosolve(int index, t_queue *queue);
+void			addpathstosolve(t_pathtosolve *paths, int index, t_queue *queue);
+void			cleanpathtosolve(t_pathtosolve **head);
+void			cleanpathsolver(t_pathsolver **pathsolver);
+void			cleanpath(t_path **head);
+t_path			*createpath(int from, int to);
+void			createitog(int to, t_pathsolver *now);
+void			addpaths(t_lemin *lem, t_queue *queue, int *visit, t_pathsolver *now);
+void			processqueue(t_lemin *lem, t_queue **queue, int *visit);
+int				getcountofpaths(t_pathtosolve *pathtosolve);
+void			connectpath(t_pathsolver *pathsolver);
+t_pathtosolve	*getpath(t_pathtosolve *head, int len);
+void			chosebest(t_pathsolver *pathsolver);
+void			makeshort(t_pathsolver *pathsolver);
+char			*namebyindex(t_room *rooms, int index);
 
 
 #endif

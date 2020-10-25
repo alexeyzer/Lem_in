@@ -39,6 +39,8 @@ int main(int argc, char **argv)
     //visual(lemin);
     isvalid(&lemin);
     ft_printf("no erro");
+    solv(lemin);
+    ft_printf("done");
     exitlem(&lemin, NULL, NULL);
     return (0);
 }
