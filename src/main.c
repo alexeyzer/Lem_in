@@ -38,7 +38,6 @@ int main(int argc, char **argv)
     parsing(fd, &lemin);
     //visual(lemin);
     isvalid(&lemin);
-    ft_printf("no erro");
     solv(lemin);
     ft_printf("done");
     exitlem(&lemin, NULL, NULL);

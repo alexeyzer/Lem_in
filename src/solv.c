@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 15:44:24 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/10/25 23:45:19 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/10/26 11:40:12 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_pathsolver	*createpathsolver(int index)
 	pathsolver = NULL;
 	pathsolver = (t_pathsolver*)malloc(sizeof(t_pathsolver));
 	pathsolver->pathtosolve = NULL;
-	pathsolver->len_path = 0;
+	pathsolver->len_path = 214748364;
 	pathsolver->path = NULL;
 	pathsolver->index = index;
 	return (pathsolver);
@@ -52,13 +52,15 @@ void	solv(t_lemin *lemin)
 	t_pathsolver	*pathsolver;
 	int				*massvisit;
 	t_path			*path;
+	int i;
 
+	i = 0;
 	massvisit = massvisited(lemin);
 	queue = createqueue();
 	pathsolver = createpathsolver(lemin->start->index);
 	queue->path_solver = pathsolver;
 	processqueue(lemin, &queue, massvisit);
-	makeshort(pathsolver);
+	makeshort(pathsolver, lemin);
 	path = pathsolver->path;
 	ft_printf("%s->", namebyindex(lemin->rooms,path->from));
 	while (path != NULL)

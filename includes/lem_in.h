@@ -97,11 +97,12 @@ void			createitog(int to, t_pathsolver *now);
 void			addpaths(t_lemin *lem, t_queue *queue, int *visit, t_pathsolver *now);
 void			processqueue(t_lemin *lem, t_queue **queue, int *visit);
 int				getcountofpaths(t_pathtosolve *pathtosolve);
-void			connectpath(t_pathsolver *pathsolver);
+void			connectpath(t_pathsolver *pathsolver, t_lemin *lemin);
 t_pathtosolve	*getpath(t_pathtosolve *head, int len);
-void			chosebest(t_pathsolver *pathsolver);
-void			makeshort(t_pathsolver *pathsolver);
+void			chosebest(t_pathsolver *pathsolver, t_lemin *lemin);
+void			makeshort(t_pathsolver *pathsolver, t_lemin *lemin);
 char			*namebyindex(t_room *rooms, int index);
+t_pathtosolve	*getshortpath(t_pathsolver *pathsolver);
 
 
 #endif

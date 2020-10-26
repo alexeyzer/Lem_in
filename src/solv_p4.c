@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 18:31:07 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/10/25 23:44:07 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/10/26 11:34:53 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,22 @@ char *namebyindex(t_room *rooms, int index)
 	else
 		return namebyindex(rooms->next, index);
 	
+}
+
+t_pathtosolve	*getshortpath(t_pathsolver *pathsolver)
+{
+	int min;
+	t_pathtosolve *pathtosolve;
+
+	pathtosolve = pathsolver->pathtosolve;
+	min = pathtosolve->path_solver->len_path;
+	pathtosolve = pathtosolve->next;
+	while (pathtosolve != NULL)
+	{
+		if (pathtosolve->path_solver->len_path < min)
+			min = pathtosolve->path_solver->len_path;
+		pathtosolve = pathtosolve->next;
+	}
+	pathtosolve = getpath(pathsolver->pathtosolve, min);
+	return (pathtosolve);
 }
