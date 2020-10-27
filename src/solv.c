@@ -63,6 +63,7 @@ t_path	*solv_path(t_lemin *lemin)
 	path = pathsolver->path;
 	pathsolver->path = NULL;
 	cleanpathsolver(&pathsolver);
+	free(massvisit);
 	return (path);
 }
 
@@ -75,5 +76,5 @@ void mainsolver(t_lemin *lemin)
 	fastestpath = solv_path(lemin);
 	len = getlenpath(fastestpath);
 	printpath(fastestpath, lemin);
-	
+	cleanpath(&fastestpath);	
 }
