@@ -11,7 +11,8 @@
 # **************************************************************************** #
 
 SRC = main.c parsing.c work_withstruct.c parsing_p2.c func.c validation.c \
-		solv.c solv_p2.c solv_p3.c solv_p4.c short.c
+		solv.c solv_p2.c solv_p3.c solv_p4.c short.c pathsandsolutions.c \
+		movments.c
 
 SRC_DIR = src/
 

@@ -13,6 +13,7 @@ t_lemin *init_lemin()
     lemin->rooms = NULL;
     lemin->mass = NULL;
     lemin->start = NULL;
+    lemin->head_solution = NULL;
     lemin->connection = 0;
     lemin->end = NULL;
     return (lemin);

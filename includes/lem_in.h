@@ -16,6 +16,21 @@ typedef struct	s_room
 	
 }				t_room;
 
+typedef struct	s_solution
+{
+	struct	s_paths		*headpaths;
+	int					movements;
+	struct	s_solution 	*next;
+	
+}				t_solution;
+
+typedef struct	s_paths
+{
+	struct	s_path		*headpath;
+	int					ants_go;
+	struct	s_paths		*next;
+}				t_paths;
+
 typedef struct	s_path
 {
 	int					from;
@@ -50,6 +65,7 @@ typedef struct	s_lemin
 	struct	s_room	*rooms;
 	struct	s_room	*start;
 	struct	s_room	*end;
+	struct  s_solution *head_solution;
 	int				**mass;
 	int				connection;
 	double				ants_count;
@@ -106,6 +122,12 @@ t_pathtosolve	*getshortpath(t_pathsolver *pathsolver);
 void			printpath(t_path *head, t_lemin *lemin);
 void			mainsolver(t_lemin *lemin);
 int				getlenpath(t_path *head);
-
+t_paths			*createpaths(t_path *head);
+void			addpathtopaths(t_paths *wheretoadd ,t_path *path_toadd);
+t_solution 		*createsolution(t_paths *head);
+void			addsolution(t_solution *headsolution, t_paths *head_ofpaths);
+int				pathscount(t_paths *head_ofpaths);
+int				getmovements(t_paths *head_ofpaths, int numberofants);
+int				getcountofpathsswithpathin(t_paths *head_ofpaths);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   solv.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 15:44:24 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/10/27 09:01:54 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/10/27 13:17:59 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,25 @@ t_path	*solv_path(t_lemin *lemin)
 
 void mainsolver(t_lemin *lemin)
 {
-	t_path	*fastestpath;
-	int len;
+	t_solution *solution1;
 
-	fastestpath = NULL;
-	fastestpath = solv_path(lemin);
-	len = getlenpath(fastestpath);
-	printpath(fastestpath, lemin);
-	cleanpath(&fastestpath);	
+	solution1 = createsolution(createpaths(solv_path(lemin)));
+	solution1->movements = getmovements(solution1->headpaths, lemin->ants_count);
+	if (getlenpath(solution1->headpaths->headpath) < lemin->ants_count)
+	{
+		ft_printf("hey looking for new solution");
+		return ;
+	}
+	else
+	{
+		//solved;
+		//printantsmoves();
+		//free all
+		//end
+	}
+	
+	ft_printf("%d\n", getlenpath(solution1->headpaths->headpath));
+	ft_printf("%d\n", solution1->movements);
+	printpath(solution1->headpaths->headpath, lemin);
+	//cleanpath(&fastestpath);
 }
