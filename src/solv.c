@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 15:44:24 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/10/27 13:46:06 by aguiller         ###   ########.fr       */
+/*   Updated: 2020/10/27 22:37:08 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,14 +81,13 @@ void mainsolver(t_lemin *lemin)
 	}
 	else
 	{
+		ft_printf("%d\n", getlenpath(solution_head->headpaths->headpath));
+		ft_printf("%d\n", solution_head->movements);
+		printpath(solution_head->headpaths->headpath, lemin);
 		//solved;
 		//printantsmoves();
 		//free all
 		//end
 	}
-	
-	ft_printf("%d\n", getlenpath(solution_head->headpaths->headpath));
-	ft_printf("%d\n", solution_head->movements);
-	printpath(solution_head->headpaths->headpath, lemin);
 	//cleanpath(&fastestpath);
 }

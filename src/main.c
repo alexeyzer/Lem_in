@@ -41,7 +41,6 @@ int main(int argc, char **argv)
     parsing(fd, &lemin);
     //visual(lemin);
     isvalid(&lemin);
-
     mainsolver(lemin);
     ft_printf("done");
     exitlem(&lemin, NULL, NULL);

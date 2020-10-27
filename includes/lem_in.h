@@ -43,6 +43,7 @@ typedef struct	s_path
 {
 	int					from;
 	int					to;
+	int					ant;
 	struct	s_path		*next;
 }				t_path;
 
@@ -137,7 +138,8 @@ void			addpathtopaths(t_paths *wheretoadd ,t_path *path_toadd);
 t_solution 		*createsolution(t_paths *head);
 void			addsolution(t_solution *headsolution, t_paths *head_ofpaths);
 int				pathscount(t_paths *head_ofpaths);
-int				getmovements(t_paths *head_ofpaths, int numberofants);
+int				getmovements(t_paths *head_ofpaths, int n);
+void			getants(t_paths *head_ofpaths, int n);
 int				getcountofpathsswithpathin(t_paths *head_ofpaths);
 int				specialgetnextlin(const int fd, char **line, t_lemin *lemin);
 void			cleanfile(t_file *head);
