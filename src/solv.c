@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 15:44:24 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/10/26 11:40:12 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/10/27 09:01:54 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,14 @@ void queueadd(t_queue	*queue, t_pathsolver *pathsolver)
 	queue->next->path_solver = pathsolver;
 }
 
-void	solv(t_lemin *lemin)
+t_path	*solv_path(t_lemin *lemin)
 {
 	t_queue			*queue;
 	t_pathsolver	*pathsolver;
 	int				*massvisit;
 	t_path			*path;
-	int i;
 
-	i = 0;
+	path = NULL;
 	massvisit = massvisited(lemin);
 	queue = createqueue();
 	pathsolver = createpathsolver(lemin->start->index);
@@ -62,10 +61,19 @@ void	solv(t_lemin *lemin)
 	processqueue(lemin, &queue, massvisit);
 	makeshort(pathsolver, lemin);
 	path = pathsolver->path;
-	ft_printf("%s->", namebyindex(lemin->rooms,path->from));
-	while (path != NULL)
-	{
-		ft_printf("%s->", namebyindex(lemin->rooms, path->to));
-		path = path->next;
-	}
+	pathsolver->path = NULL;
+	cleanpathsolver(&pathsolver);
+	return (path);
+}
+
+void mainsolver(t_lemin *lemin)
+{
+	t_path	*fastestpath;
+	int len;
+
+	fastestpath = NULL;
+	fastestpath = solv_path(lemin);
+	len = getlenpath(fastestpath);
+	printpath(fastestpath, lemin);
+	
 }

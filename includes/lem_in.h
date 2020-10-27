@@ -84,7 +84,7 @@ void	antscheck(int fd, char **line, t_lemin **lemin);
 void	visual(t_lemin *lemin);
 int		*massvisited(t_lemin *lemin);
 t_pathsolver	*createpathsolver(int index);
-void			solv(t_lemin *lemin);
+t_path			*solv_path(t_lemin *lemin);
 t_queue			*createqueue();
 void			queueadd(t_queue	*quary, t_pathsolver *pathsolver);
 t_pathtosolve	*createpathtosolve(int index, t_queue *queue);
@@ -103,6 +103,9 @@ void			chosebest(t_pathsolver *pathsolver, t_lemin *lemin);
 void			makeshort(t_pathsolver *pathsolver, t_lemin *lemin);
 char			*namebyindex(t_room *rooms, int index);
 t_pathtosolve	*getshortpath(t_pathsolver *pathsolver);
+void			printpath(t_path *head, t_lemin *lemin);
+void			mainsolver(t_lemin *lemin);
+int				getlenpath(t_path *head);
 
 
 #endif
