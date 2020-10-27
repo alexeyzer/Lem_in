@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_p2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 16:57:06 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/10/25 16:46:27 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/10/27 21:15:31 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void startend(int fd, t_lemin **lemin, char **str, int status)
 
 	old_status = status;
 	ft_strdel(str);
-	while(get_next_line(fd, str))
+	while(specialgetnextlin(fd, str, *lemin))
 	{
 		if (*str == NULL || **str == '\0')
 			exitlem(lemin, "Error\n", str);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 16:29:08 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/10/25 15:49:36 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/10/27 21:13:04 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	parsing(int fd, t_lemin **lemin)
 
 	line = NULL;
 	antscheck(fd, &line, lemin);
-	while (get_next_line(fd, &line) > 0)
+	while (specialgetnextlin(fd, &line, *lemin) > 0)
     {
         if (*line == '\0')
 			exitlem(lemin, "Error empty line\n", &line);

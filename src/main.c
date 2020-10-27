@@ -14,6 +14,7 @@ t_lemin *init_lemin()
     lemin->mass = NULL;
     lemin->start = NULL;
     lemin->head_solution = NULL;
+    lemin->head_file = NULL;
     lemin->connection = 0;
     lemin->end = NULL;
     return (lemin);
@@ -36,9 +37,11 @@ int main(int argc, char **argv)
         }
     }
     lemin = init_lemin();
+
     parsing(fd, &lemin);
     //visual(lemin);
     isvalid(&lemin);
+
     mainsolver(lemin);
     ft_printf("done");
     exitlem(&lemin, NULL, NULL);
@@ -55,6 +58,7 @@ void    exitlem(t_lemin **lemin, char *str, char **str_tofree)
         ft_printf("%s", str);
     if (*lemin != NULL)
     {
+        cleanfile(((*lemin)->head_file));
         head = (*lemin)->rooms;
         (*lemin)->rooms = NULL;
         if (head != NULL)

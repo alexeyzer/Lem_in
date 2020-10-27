@@ -24,6 +24,14 @@ typedef struct	s_solution
 	
 }				t_solution;
 
+typedef struct	s_file
+{
+	char 					*line;
+	struct	s_file			*next;
+	
+}				t_file;
+
+
 typedef struct	s_paths
 {
 	struct	s_path		*headpath;
@@ -42,6 +50,7 @@ typedef struct	s_pathsolver
 {
 	int					index;
 	int					len_path;
+
 	struct	s_path		*path;
 	struct	s_pathtosolve	*pathtosolve;
 	
@@ -69,6 +78,7 @@ typedef struct	s_lemin
 	int				**mass;
 	int				connection;
 	double				ants_count;
+	struct	s_file		*head_file;
 	int				rooms_count;
 	
 }				t_lemin;
@@ -129,5 +139,7 @@ void			addsolution(t_solution *headsolution, t_paths *head_ofpaths);
 int				pathscount(t_paths *head_ofpaths);
 int				getmovements(t_paths *head_ofpaths, int numberofants);
 int				getcountofpathsswithpathin(t_paths *head_ofpaths);
+int				specialgetnextlin(const int fd, char **line, t_lemin *lemin);
+void			cleanfile(t_file *head);
 
 #endif

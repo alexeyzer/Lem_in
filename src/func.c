@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   func.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 11:11:25 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/10/21 21:04:26 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/10/27 21:13:11 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int getindex(t_lemin **lemin, char *str)
 
 void antscheck(int fd, char **line, t_lemin **lemin)
 {
-	while (get_next_line(fd, &(*line)))
+	while (specialgetnextlin(fd, &(*line), *lemin))
 	{
 		if (*line == NULL || **line == '\0')
 			exitlem(lemin, "Error\n", line);
