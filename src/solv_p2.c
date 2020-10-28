@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 17:19:32 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/10/26 11:11:42 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/10/28 14:50:48 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,31 +56,31 @@ void addpathstosolve(t_pathtosolve *paths, int index, t_queue *queue)
 	paths->next = createpathtosolve(index, queue);
 }
 
-void addpaths(t_lemin *lem, t_queue *queue, int *visit, t_pathsolver *now)
+void addpaths(t_lemin *l, t_queue *queue, int *v, t_pathsolver *now)
 {
 	int i;
 	int run;
 
 	i = 0;
 	run = 1;
-	while (i < lem->rooms_count && run)
+	while (i++ < l->rooms_count && run)
 	{
-		if (lem->mass[now->index][i] == 1 && visit[i] == 0)
+		if ((l->mass[now->index][i] == 1 || l->mass[now->index][i] == -1)
+			&& v[i] == 0)
 		{
-			if (i == lem->end->index)
+			if (i == l->end->index)
 			{
 				run = 0;
 				createitog(i, now);
 			}
 			else
 			{
-				visit[i] = 1;
+				v[i] = 1;
 				if (now->pathtosolve == NULL)
 					now->pathtosolve = createpathtosolve(i, queue);
 				else
 					addpathstosolve(now->pathtosolve, i, queue);
 			}
 		}
-		i++;
 	}
 }

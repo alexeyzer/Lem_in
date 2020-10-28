@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   solv.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 15:44:24 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/10/27 22:37:08 by aguiller         ###   ########.fr       */
+/*   Updated: 2020/10/28 18:00:00 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,16 @@ t_path	*solv_path(t_lemin *lemin)
 void mainsolver(t_lemin *lemin)
 {
 	t_solution *solution_head;
+	t_solution *new;
 
 	solution_head = createsolution(createpaths(solv_path(lemin)));
 	solution_head->movements = getmovements(solution_head->headpaths, lemin->ants_count);
 	lemin->head_solution = solution_head;
 	if (getlenpath(solution_head->headpaths->headpath) < lemin->ants_count)
 	{
-		ft_printf("hey looking for new solution");
-		return ;
+		new = findbest(lemin);
+		ft_printf("%d\n", new->movements);
+		ft_printf("%d\n", getcountofpathsswithpathin(new->headpaths));
 	}
 	else
 	{

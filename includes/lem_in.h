@@ -35,6 +35,7 @@ typedef struct	s_file
 typedef struct	s_paths
 {
 	struct	s_path		*headpath;
+	int					len_path;
 	int					ants_go;
 	struct	s_paths		*next;
 }				t_paths;
@@ -143,5 +144,18 @@ void			getants(t_paths *head_ofpaths, int n);
 int				getcountofpathsswithpathin(t_paths *head_ofpaths);
 int				specialgetnextlin(const int fd, char **line, t_lemin *lemin);
 void			cleanfile(t_file *head);
+void			addpathtomass(t_lemin *lemin, t_path *solved_path);
+int				checkperesech(t_lemin *lemin);
+int				checksamerooms(t_lemin *lemin);
+void			dellperesech(t_lemin	*lemin);
+t_paths			*givepaths(t_lemin *lemin);
+t_solution		*findbest(t_lemin *lemin);
+t_paths			*becomelastpaths(t_paths *head);
+t_solution		*newsolution(t_lemin *lemin, t_solution *lastsolution);
+int				connectpathspecial(t_lemin *lemin, int index, t_path *now_path);
+int				findspecial(t_lemin *lemin);
+t_solution		*getsolfromsoltns(int i, t_solution *head);
+int				minmovementsfromsolutions(t_solution *head);
+t_paths			*copypahs(t_paths *head_tocopy);
 
 #endif

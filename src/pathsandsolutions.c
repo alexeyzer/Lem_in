@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pathsandsolutions.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/27 12:08:53 by aguiller          #+#    #+#             */
-/*   Updated: 2020/10/27 13:32:31 by aguiller         ###   ########.fr       */
+/*   Updated: 2020/10/28 18:03:05 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_paths     *createpaths(t_path *head)
     if (!(head_paths = (t_paths*)malloc(sizeof(t_paths))))
         return (NULL);
     head_paths->headpath = head;
+    head_paths->len_path = getlenpath(head);
     head_paths->ants_go = 0;
     head_paths->next = NULL;
     return (head_paths);

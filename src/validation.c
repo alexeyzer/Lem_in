@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 15:21:51 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/10/25 18:40:23 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/10/28 16:44:43 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int find(int **massive, int index, t_lemin *lemin)
 	result = 0;
 	while (i < lemin->rooms_count)
 	{
-		if (lemin->mass[index][i] == 1 && (*massive)[i] == 0)
+		if ((lemin->mass[index][i] == 1 || lemin->mass[index][i] == -1) && (*massive)[i] == 0)
 		{
 			if (i == lemin->end->index)
 				return (1);
