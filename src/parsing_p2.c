@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_p2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 16:57:06 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/10/27 21:15:31 by aguiller         ###   ########.fr       */
+/*   Updated: 2020/10/28 19:22:27 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ void connection(t_lemin **lemin, char **str)
 {
 	if ((*lemin)->connection == 0)
 	{
+		if ((*lemin)->rooms == NULL)
+			exitlem(lemin, "Error\n", str);
 		(*lemin)->rooms_count = lastroom((*lemin)->rooms)->index + 1;
 		checkconnect(lemin, str);
 		initmass(lemin);

@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 18:31:07 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/10/28 17:02:24 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/10/28 20:08:56 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,16 @@ void	processqueue(t_lemin *lem, t_queue **queue, int *visit)
 
 	while (*queue != NULL)
 	{
-		addpaths(lem, *queue, visit, (*queue)->path_solver);
+		addpaths(lem, queue, visit, (*queue)->path_solver);
 		old = (*queue);
-		(*queue) = (*queue)->next;
-		old->next = NULL;
-		old->path_solver = NULL;
-		free(old);
+		if (*queue)
+			(*queue) = (*queue)->next;
+		if (old)
+		{
+			old->next = NULL;
+			old->path_solver = NULL;
+			free(old);
+		}
 	}
 }
 

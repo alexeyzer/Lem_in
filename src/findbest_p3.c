@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 17:19:13 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/10/28 18:16:17 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/10/28 20:07:32 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,15 @@ t_paths *copypahs(t_paths *head_tocopy)
 		head_tocopy = head_tocopy->next;
 	}
 	return (newhead);
+}
+
+void scpecialclearqueue(t_queue **head)
+{
+	 while((*head)->next != NULL)
+    {
+        scpecialclearqueue(&((*head)->next));
+        (*head)->next = NULL;
+    }
+    free(*head);
+    *head = NULL;
 }

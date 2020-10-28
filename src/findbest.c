@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 14:45:09 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/10/28 18:18:29 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/10/28 19:26:38 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,10 +109,7 @@ int checksamerooms(t_lemin *lemin)
 		while (j < lemin->rooms_count)
 		{
 			if (lemin->mass[i][j] == -1)
-			{
-				ft_printf("%d->%d", i, j);
 				count++;
-			}
 			j++;
 		}
 		if (count > 1)

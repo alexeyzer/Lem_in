@@ -121,8 +121,8 @@ void			cleanpathtosolve(t_pathtosolve **head);
 void			cleanpathsolver(t_pathsolver **pathsolver);
 void			cleanpath(t_path **head);
 t_path			*createpath(int from, int to);
-void			createitog(int to, t_pathsolver *now);
-void			addpaths(t_lemin *lem, t_queue *queue, int *visit, t_pathsolver *now);
+int				createitog(int to, t_pathsolver *now, t_queue **queue, t_lemin *lemin);
+void			addpaths(t_lemin *l, t_queue **queue, int *v, t_pathsolver *now);
 void			processqueue(t_lemin *lem, t_queue **queue, int *visit);
 int				getcountofpaths(t_pathtosolve *pathtosolve);
 void			connectpath(t_pathsolver *pathsolver, t_lemin *lemin);
@@ -157,5 +157,6 @@ int				findspecial(t_lemin *lemin);
 t_solution		*getsolfromsoltns(int i, t_solution *head);
 int				minmovementsfromsolutions(t_solution *head);
 t_paths			*copypahs(t_paths *head_tocopy);
+void			scpecialclearqueue(t_queue **head);
 
 #endif
