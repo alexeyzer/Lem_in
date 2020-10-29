@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 16:00:40 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/10/28 17:52:15 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/10/29 20:13:11 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,12 @@ int connectpathspecial(t_lemin *lemin, int index, t_path *now_path)
 		{
 			if (i == lemin->end->index)
 			{
-				now_path->next = createpath(index, i);
+				littlehelpfunc(now_path, index, i);
 				return (1);
 			}
 			else
 			{
-				now_path->next = createpath(index, i);
+				littlehelpfunc(now_path, index, i);
 				connectpathspecial(lemin, i, now_path->next);
 				return (1);
 			}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   store.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/27 20:59:30 by aguiller          #+#    #+#             */
-/*   Updated: 2020/10/27 21:20:51 by aguiller         ###   ########.fr       */
+/*   Updated: 2020/10/29 20:12:07 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,11 @@ void cleanfile(t_file *head)
     ft_strdel(&(head->line));
     free(head);
     head = NULL;
+}
+
+void littlehelpfunc(t_path *now_path, int index, int i)
+{
+    now_path->next = createpath(index, i);
+	if (now_path->next != NULL)
+		now_path->next->prev = now_path;
 }

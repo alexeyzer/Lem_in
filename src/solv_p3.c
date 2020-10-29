@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 17:51:30 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/10/25 23:06:16 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/10/29 20:20:09 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	cleanpath(t_path **head)
     {
         cleanpath(&((*head)->next));
         (*head)->next = NULL;
+		(*head)->prev = NULL;
     }
     free(*head);
     *head = NULL;
@@ -35,6 +36,7 @@ t_path *createpath(int from, int to)
 	head->from = from;
 	head->to = to;
 	head->next = NULL;
+	head->prev = NULL;
 	return (head);
 }
 

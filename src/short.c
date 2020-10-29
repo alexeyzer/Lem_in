@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 21:33:56 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/10/26 11:35:24 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/10/29 20:02:12 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void connectpath(t_pathsolver *pathsolver, t_lemin *lemin)
 		pathsolver->len_path = lemin->mass[pathsolver->index][pathsolver->pathtosolve->path_solver->index] + pathsolver->pathtosolve->path_solver->len_path;
 	pathsolver->path = createpath(pathsolver->index, pathsolver->pathtosolve->path_solver->index);
 	pathsolver->path->next = pathsolver->pathtosolve->path_solver->path;
+	if (pathsolver->path->next != NULL)
+		pathsolver->path->next->prev = pathsolver->path;
 	pathsolver->pathtosolve->path_solver->path = NULL;
 	cleanpathtosolve(&(pathsolver->pathtosolve));
 }
@@ -70,6 +72,8 @@ void chosebest(t_pathsolver *pathsolver, t_lemin *lemin)
 		pathsolver->len_path = lemin->mass[pathsolver->index][pathsolver->pathtosolve->path_solver->index] + pathtosolve->path_solver->len_path;
 	pathsolver->path = createpath(pathsolver->index, pathtosolve->path_solver->index);
 	pathsolver->path->next = pathtosolve->path_solver->path;
+	if (pathsolver->path->next != NULL)
+		pathsolver->path->next->prev = pathsolver->path;
 	pathtosolve->path_solver->path = NULL;
 	cleanpathtosolve(&(pathsolver->pathtosolve));
 }
