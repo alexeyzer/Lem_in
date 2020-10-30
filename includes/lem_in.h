@@ -86,6 +86,7 @@ typedef struct	s_lemin
 	
 }				t_lemin;
 
+void 	ants_go(t_lemin *lemin);
 void	parsing(int fd, t_lemin **lemin);
 void    exitlem(t_lemin **lemin, char *str, char **str_tofree);
 void	c_clear(t_room *head);
