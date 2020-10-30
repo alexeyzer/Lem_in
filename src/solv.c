@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 15:44:24 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/10/30 15:41:31 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/10/30 16:38:14 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void mainsolver(t_lemin *lemin)
 {
 	t_solution *solution_head;
 	t_solution *new;
-	t_paths *now;
+	//t_paths *now;
 	int i;
 
 	i = 1;
@@ -79,7 +79,9 @@ void mainsolver(t_lemin *lemin)
 	solution_head->movements = getmovements(solution_head->headpaths, lemin->ants_count);
 	lemin->head_solution = solution_head;
 	//правильное решение всегда лежит в new!)
-	new = findbest(lemin);
+	lemin->bestsolution = findbest(lemin);
+	new = lemin->bestsolution;
+	/*
 	ft_printf("%d\n", new->movements);
 	ft_printf("%d\n", getcountofpathsswithpathin(new->headpaths));
 	now = new->headpaths;
@@ -91,5 +93,5 @@ void mainsolver(t_lemin *lemin)
 		printpath(now->headpath, lemin);
 		now = now->next;
 		i++;
-	}
+	}*/
 }

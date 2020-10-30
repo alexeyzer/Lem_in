@@ -78,6 +78,7 @@ typedef struct	s_lemin
 	struct	s_room	*start;
 	struct	s_room	*end;
 	struct  s_solution *head_solution;
+	struct  s_solution *bestsolution;
 	int				**mass;
 	int				connection;
 	double				ants_count;
