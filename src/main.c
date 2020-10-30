@@ -42,6 +42,7 @@ int main(int argc, char **argv)
     //visual(lemin);
     isvalid(&lemin);
     mainsolver(lemin);
+	ants_go(lemin);
     ft_printf("done");
     exitlem(&lemin, NULL, NULL);
     return (0);
