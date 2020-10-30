@@ -160,4 +160,6 @@ int				minmovementsfromsolutions(t_solution *head);
 t_paths			*copypahs(t_paths *head_tocopy);
 void			scpecialclearqueue(t_queue **head);
 void			littlehelpfunc(t_path *now_path, int index, int i);
+void			sortpaths(t_paths *head);
+t_paths			*compare(t_paths *head_ofpaths, t_paths *now, t_paths *compareto);
 #endif
