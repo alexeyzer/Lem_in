@@ -35,6 +35,7 @@ t_path *createpath(int from, int to)
 		return (NULL);
 	head->from = from;
 	head->to = to;
+	head->ant = 0;
 	head->next = NULL;
 	head->prev = NULL;
 	return (head);

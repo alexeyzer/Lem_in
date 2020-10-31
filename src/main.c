@@ -42,6 +42,7 @@ int main(int argc, char **argv)
     //visual(lemin);
     isvalid(&lemin);
     mainsolver(lemin);
+	//print_path(lemin->head_solution->headpaths->headpath);
 	ants_go(lemin);
     ft_printf("done");
     exitlem(&lemin, NULL, NULL);

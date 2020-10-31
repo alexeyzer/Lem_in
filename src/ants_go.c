@@ -29,20 +29,55 @@ void push(t_path *current, t_lemin *lemin)
 	current->ant = 0;
 }
 
-void	move_ant(t_lemin *lemin, t_path *path)
+int ant_scan_f(t_path *path)
+{
+	t_path *p;
+
+	p = path->next;
+	while (p)
+	{
+		if (p->ant)
+			return (1);
+		p = p->next;
+	}
+	return (0);
+}
+
+int ant_scan_b(t_path *path)
+{
+	t_path *p;
+
+	p = path->prev;
+	while (p)
+	{
+		if (p->ant)
+			return (1);
+		p = p->prev;
+	}
+	return (0);
+}
+
+void	move_ants(t_lemin *lemin, t_path *path)
 {
 	t_path	*current;
-	//int		ant;
 
 	while (path->ant)
 	{
 		current = path;
 		while (current->next)
 		{
+			//if(current->prev)
+			//	ft_printf("ant=%d, path =%s,  prev->ant=%d, prec->path=%s\n", current->ant, find_room(lemin->rooms, current->to), current->next->ant, find_room(lemin->rooms, current->next->to));
 			if (current->ant && !current->next->ant && (!current->prev || current->prev->ant))
 				push(current, lemin);
-			if (current->ant && current->next->ant && !current->next->next)
+			getchar();
+			if(current->ant && current->next->ant && !current->next->next)
 				push(current, lemin);
+			getchar();
+			//printf("b=%d, f=%d\n", ant_scan_b(current), ant_scan_f(current));
+			if(!ant_scan_b(current) && !current->next->ant && ant_scan_f(current))
+				push(current, lemin);
+			getchar();
 			current = current->next;
 		}
 	}
@@ -61,7 +96,7 @@ void 	ant_to_path(t_lemin *lemin, t_paths *path, int ant)
 {
 	char 	*room;
 	
-	move_ant(lemin, path->headpath);
+	move_ants(lemin, path->headpath);
 	if (path->ants_go && !path->headpath->ant)
 	{
 		path->headpath->ant = ant;
@@ -97,7 +132,7 @@ void 	ants_go(t_lemin *lemin)
 	t_paths *paths;
 	t_path	*path;
 	
-	paths = lemin->head_solution->headpaths;
+	paths = lemin->bestsolution->headpaths;
 	ant = 1;
 	while (ant <= lemin->ants_count)
 	{
@@ -107,7 +142,7 @@ void 	ants_go(t_lemin *lemin)
 			paths = paths->next;
 		}
 		ft_printf("\n");
-		paths = lemin->head_solution->headpaths;
+		paths = lemin->bestsolution->headpaths;
 	}
 	while (!is_path_clear(paths))
 	{
@@ -116,8 +151,10 @@ void 	ants_go(t_lemin *lemin)
 		{
 			//print_path(paths->headpath);
 			//getchar();
-			move_ant(lemin, path);
+			move_ants(lemin, path);
 			path = path->next;
+			ft_printf("\n");
+			getchar();
 		}
 		paths = paths->next;
 	}
