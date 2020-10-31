@@ -89,7 +89,7 @@ typedef struct	s_lemin
 
 void 	ants_go(t_lemin *lemin);
 void	parsing(int fd, t_lemin **lemin);
-void    exitlem(t_lemin **lemin, char *str, char **str_tofree);
+void	exitlem(t_lemin **lemin, char *str, char **str_tofree);
 void	c_clear(t_room *head);
 int		isitroom2(char **str, t_lemin **lemin, int i);
 void	parstostruct(int fd, t_lemin **lemin, char **str, int status);
@@ -100,7 +100,7 @@ int		checkroom(t_lemin **lemin, int coord_x, int coord_y, char *name);
 void 	add(t_lemin **lemin, int status, char **str);
 t_room 	*addrooms(t_lemin **lemin, char **str);
 void 	startend(int fd, t_lemin **lemin, char **str, int status);
-t_room 	*lastroom(t_room *rooms);
+t_room	*lastroom(t_room *rooms);
 void	checkconnect(t_lemin **lemin, char **str);
 int		isroom(t_lemin **lemin, char *str);
 void	connection(t_lemin **lemin, char **str);

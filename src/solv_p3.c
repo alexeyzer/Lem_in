@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   solv_p3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: bcolossu <bcolossu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 17:51:30 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/10/29 20:20:09 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/10/31 17:02:03 by bcolossu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@ void	cleanpath(t_path **head)
 {
 	if (head == NULL)
 		return ;
-	while((*head)->next != NULL)
-    {
-        cleanpath(&((*head)->next));
-        (*head)->next = NULL;
+	while ((*head)->next != NULL)
+	{
+		cleanpath(&((*head)->next));
+		(*head)->next = NULL;
 		(*head)->prev = NULL;
-    }
-    free(*head);
-    *head = NULL;
+	}
+	free(*head);
+	*head = NULL;
 }
 
-t_path *createpath(int from, int to)
+t_path	*createpath(int from, int to)
 {
 	t_path *head;
 
