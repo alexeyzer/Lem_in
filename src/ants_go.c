@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ants_go.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 11:49:16 by andrew            #+#    #+#             */
-/*   Updated: 2020/10/31 18:57:15 by aguiller         ###   ########.fr       */
+/*   Updated: 2020/10/31 23:30:51 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,17 +124,18 @@ void	move_ants_second(t_lemin *lemin, t_path *path)
 	}
 }
 
-void	ant_to_path(t_lemin *lemin, t_paths *paths, int ant)
+void	ant_to_path(t_lemin *lemin, t_paths *paths, int *ant)
 {
 	char	*room;
 
-	move_ants(lemin, paths->headpath);
+	move_ants_second(lemin, paths->headpath);
 	if (paths->ants_go && !paths->headpath->ant)
 	{
-		paths->headpath->ant = ant;
+		paths->headpath->ant = *ant;
 		room = find_room(lemin->rooms, paths->headpath->to);
-		ft_printf("L%d-%s ", ant, room);
+		ft_printf("L%d-%s ", *ant, room);
 		paths->ants_go--;
+		*ant = *ant + 1;
 	}
 }
 
@@ -178,11 +179,11 @@ void	ants_go(t_lemin *lemin)
 
 	paths = lemin->bestsolution->headpaths;
 	ant = 1;
-	while (ant <= lemin->ants_count)
+	while (ant < lemin->ants_count + 1)
 	{
 		while (paths)
 		{
-			ant_to_path(lemin, paths, ant++);
+			ant_to_path(lemin, paths, &ant);
 			paths = paths->next;
 		}
 		ft_printf("\n");

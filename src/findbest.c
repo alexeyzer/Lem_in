@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   findbest.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 14:45:09 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/10/31 21:37:21 by aguiller         ###   ########.fr       */
+/*   Updated: 2020/10/31 23:34:17 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,10 @@ void newsolution(t_lemin *lemin, t_solution *lastsolution)
                 addpathtopaths(lastsolution->headpaths, newpath);
             else
             {
+                //ft_printf("prikl\n");
 				addpathtopaths(lastsolution->headpaths, newpath);
 				//peresechs = findcurrentpath(lastsolution->headpaths, i);
-				//be3(peresechs->headpath, lemin);
+			    //be3(peresechs->headpath, lemin);
 				//be3(newpath, lemin);
 				//delete(&(lastsolution->headpaths),  peresechs);
                 //dellperesech(lemin);
