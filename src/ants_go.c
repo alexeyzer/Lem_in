@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ants_go.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcolossu <bcolossu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 11:49:16 by andrew            #+#    #+#             */
-/*   Updated: 2020/10/31 17:03:55 by bcolossu         ###   ########.fr       */
+/*   Updated: 2020/10/31 18:57:15 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,7 +188,7 @@ void	ants_go(t_lemin *lemin)
 		ft_printf("\n");
 		paths = lemin->bestsolution->headpaths;
 	}
-	while (!isallpathsclear(lemin->bestsolution->headpaths))
+	while (!is_path_clear(lemin->bestsolution->headpaths))
 	{
 		paths = lemin->bestsolution->headpaths;
 		while (paths != NULL)

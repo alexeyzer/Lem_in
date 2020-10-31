@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movments.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcolossu <bcolossu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/27 12:45:47 by aguiller          #+#    #+#             */
-/*   Updated: 2020/10/31 17:32:32 by bcolossu         ###   ########.fr       */
+/*   Updated: 2020/10/31 19:59:58 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,29 +32,44 @@ int getmovements(t_paths *head_ofpaths, int n)
     return ((movements / count) + (movements % count));
 }
 
-void getantsmany(t_paths *head_ofpaths, int n, t_paths *now, t_paths *compareto)
+t_paths *getpathsbyparam(t_paths *head, int i)
+{
+    while (head != NULL)
+    {
+        if ((head->ants_go) + head->len_path == i)
+            return (head);
+        head = head->next;
+    }
+    return (NULL);
+}
+
+t_paths *getthelitlest(t_paths *head)
+{
+    int min;
+    t_paths *now;
+
+    now = head;
+    min = now->ants_go + now->len_path;
+    now = now->next;
+    while (now != NULL)
+    {
+        if (now->ants_go + now->len_path < min)
+            min = now->ants_go + now->len_path;
+        now = now->next;
+    }
+    return (getpathsbyparam(head, min));
+}
+
+void getantsmany(int n, t_paths *head)
 {
 
-    t_paths *wait;
+    t_paths *now;
 
     while (n > 0)
     {
-        if (now->ants_go + getlenpath(now->headpath) <= compareto->ants_go + getlenpath(compareto->headpath))
-        {
-            if ((wait = compare(head_ofpaths, now, compareto)))
-                now = wait;
-            else
-            {
-                now->ants_go = now->ants_go + 1;
-                n--;
-            }
-        }
-        else
-        {
-            now = now->next;
-            if (now->next != NULL)
-                compareto = now->next;
-        }
+        now = getthelitlest(head);
+        now->ants_go++;
+        n--;
     }
 }
 
@@ -67,7 +82,7 @@ void getants(t_paths *head_ofpaths, int n)
     if (getcountofpathsswithpathin(head_ofpaths) > 1)
     {
         compareto = now->next;
-        getantsmany(head_ofpaths, n, now, compareto);
+        getantsmany(n, now);
     }
     else
         head_ofpaths->ants_go = n;

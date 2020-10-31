@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   solv.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcolossu <bcolossu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 15:44:24 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/10/31 18:08:44 by bcolossu         ###   ########.fr       */
+/*   Updated: 2020/10/31 21:34:10 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,26 +71,25 @@ void mainsolver(t_lemin *lemin)
 {
 	t_solution *solution_head;
 	t_solution *new;
-	t_paths *now;
+	//t_paths *now;
 	int i;
 
 	i = 1;
 	solution_head = createsolution(createpaths(solv_path(lemin)));
-	solution_head->movements = getmovements(solution_head->headpaths, lemin->ants_count);
 	lemin->head_solution = solution_head;
 	//правильное решение всегда лежит в new!)
 	lemin->bestsolution = findbest(lemin);
 	new = lemin->bestsolution;
-	i = 0;
-	while (i < lemin->rooms_count)
-	{
-		ft_printf("%d\n", lemin->mass[lemin->start->index][i]);
-		i++;
-	}
+	//i = 0;
+	//while (i < lemin->rooms_count)
+	//{
+	//	ft_printf("%d\n", lemin->mass[lemin->start->index][i]);
+	//	i++;
+	//}
 	
-	ft_printf("%d\n", new->movements);
-	ft_printf("%d\n", getcountofpathsswithpathin(new->headpaths));
-	now = new->headpaths;
+	//ft_printf("%d\n", new->movements);
+	//ft_printf("%d\n", getcountofpathsswithpathin(new->headpaths));
+	/*now = new->headpaths;
 	while (now != NULL)
 	{
 		ft_printf("path %d\n", i);
@@ -99,5 +98,5 @@ void mainsolver(t_lemin *lemin)
 		printpath(now->headpath, lemin);
 		now = now->next;
 		i++;
-	}
+	}*/
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   findbest_p2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 16:00:40 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/10/29 20:13:11 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/10/31 21:08:51 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void dellperesech(t_lemin	*lemin)
 		j = 0;
 		while (j < lemin->rooms_count)
 		{
-			if (lemin->mass[i][j] == 2 && lemin->mass[j][i] == 2)
+			if (lemin->mass[i][j] == 4 && lemin->mass[j][i] == 4)
 			{
 				lemin->mass[i][j] = 0;
 				lemin->mass[j][i] = 0;
@@ -46,8 +46,9 @@ t_paths *givepaths(t_lemin *lemin)
 	index = lemin->start->index;
 	while (i < lemin->rooms_count)
 	{
-		if (lemin->mass[index][i] == 2)
+		if (lemin->mass[index][i] == 4)
 		{
+			lemin->mass[index][i] = 2;
 			new = createpath(index, i);
 			connectpathspecial(lemin, i, new);
 			if (head == NULL)
@@ -67,8 +68,9 @@ int connectpathspecial(t_lemin *lemin, int index, t_path *now_path)
 	i = 0;
 	while (i < lemin->rooms_count)
 	{
-		if (lemin->mass[index][i] == 2)
+		if (lemin->mass[index][i] == 4)
 		{
+			lemin->mass[index][i] = 2;
 			if (i == lemin->end->index)
 			{
 				littlehelpfunc(now_path, index, i);

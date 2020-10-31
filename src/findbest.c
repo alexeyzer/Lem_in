@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   findbest.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcolossu <bcolossu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 14:45:09 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/10/31 18:12:45 by bcolossu         ###   ########.fr       */
+/*   Updated: 2020/10/31 21:37:21 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,124 +14,206 @@
 
 t_solution *findbest(t_lemin *lemin)
 {
-	t_solution *now_sol;
-	int min;
+        t_solution *now_sol;
 
-	now_sol = lemin->head_solution;
-	addpathtomass(lemin, now_sol->headpaths->headpath);
-	while (findspecial(lemin))
-	{
-		//now_sol->next = newsolution(lemin, now_sol);
-		if (now_sol->next == NULL)
-			break;
-		else
-		{
-			now_sol->next->movements = getmovements(now_sol->next->headpaths, lemin->ants_count);
-			now_sol = now_sol->next;
-		}
-	}
-	min = minmovementsfromsolutions(lemin->head_solution);
-	now_sol = getsolfromsoltns(min, lemin->head_solution);
-	return (now_sol);
+        now_sol = lemin->head_solution;
+        addpathtomass(lemin, now_sol->headpaths->headpath);
+        while (findspecial(lemin))
+                newsolution(lemin, now_sol);
+        now_sol->movements = getmovements(now_sol->headpaths, lemin->ants_count);
+        //min = minmovementsfromsolutions(lemin->head_solution);
+        //now_sol = getsolfromsoltns(min, lemin->head_solution);
+        return (now_sol);
 }
 
-t_solution *newsolution(t_lemin *lemin, t_solution *lastsolution)
+void newsolution(t_lemin *lemin, t_solution *lastsolution)
 {
-	t_path *newpath;
-	t_solution *new;
+        t_path *newpath;
+		//t_paths *peresechs;
+		int i;
 
-	newpath = solv_path(lemin);
-	if (newpath == NULL)
-		return (NULL);
-	addpathtomass(lemin, newpath);
-	if (checksamerooms(lemin) >= 0)
-		helpfunc(lemin, newpath, checksamerooms(lemin));
-	else
-	{
-		if (checkperesech(lemin) == 0)
+        newpath = solv_path(lemin);
+        if (newpath == NULL)
+                return ;
+        addpathtomass(lemin, newpath);
+        if (checksamerooms(lemin) >= 0)
 		{
-			//new = createsolution(copypahs(lastsolution->headpaths));
-			//addpathtopaths(new->headpaths, newpath);
-			addpathtopaths(lastsolution->headpaths, newpath);
-			//return (new);
+            cleanpath(&newpath);
 		}
-		else
-		{
-			dellperesech(lemin);
-			new = createsolution(givepaths(lemin));
-			return (new);
-		}
-	}
-	return (NULL);
+        else if (checksamerooms(lemin) < 0)
+        {
+            if ((i = checkperesech(lemin)) == -1)
+                addpathtopaths(lastsolution->headpaths, newpath);
+            else
+            {
+				addpathtopaths(lastsolution->headpaths, newpath);
+				//peresechs = findcurrentpath(lastsolution->headpaths, i);
+				//be3(peresechs->headpath, lemin);
+				//be3(newpath, lemin);
+				//delete(&(lastsolution->headpaths),  peresechs);
+                //dellperesech(lemin);
+				//addspec(lastsolution->headpaths, givepaths(lemin));
+            }
+        }
 }
 
 void addpathtomass(t_lemin *lemin, t_path *solved_path)
 {
-	while (solved_path != NULL)
-	{
-		lemin->mass[solved_path->from][solved_path->to] = 2;
-		if (lemin->mass[solved_path->to][solved_path->from] != 2)
-			lemin->mass[solved_path->to][solved_path->from] = 3;//вернуть 2 если не поможет
-		solved_path = solved_path->next;
-	}
+    while (solved_path != NULL)
+    {
+        lemin->mass[solved_path->from][solved_path->to] = 2;
+        if (lemin->mass[solved_path->to][solved_path->from] != 2)
+            lemin->mass[solved_path->to][solved_path->from] = -1;
+        solved_path = solved_path->next;
+    }
 }
 
 int checkperesech(t_lemin *lemin)
 {
-	int i;
-	int j;
+    int i;
+    int j;
 
-	i = 0;
-	while (i < lemin->rooms_count)
-	{
-		j = 0;
-		while (j < lemin->rooms_count)
-		{
-			if (lemin->mass[i][j] == 2 && lemin->mass[j][i] == 2)
-				return (1);
-			j++;
-		}
-		i++;
-	}
-	return (0);
+    i = 0;
+    while (i < lemin->rooms_count)
+    {
+        j = 0;
+        while (j < lemin->rooms_count)
+        {
+            if (lemin->mass[i][j] == 2 && lemin->mass[j][i] == 2)
+                return (i);
+            j++;
+        }
+        i++;
+    }
+    return (-1);
 }
 
 int checksamerooms(t_lemin *lemin)
 {
-	int i;
-	int j;
-	int count;
+        int i;
+        int j;
+        int count;
 
-	i = 0;
-	while (i < lemin->rooms_count && i != lemin->end->index)
+        i = 0;
+        while (i < lemin->rooms_count && i != lemin->end->index)
+        {
+                count = 0;
+                j = 0;
+                while (j < lemin->rooms_count)
+                {
+                        if (lemin->mass[i][j] == -1)
+                                count++;
+                        j++;
+                }
+                if (count > 1)
+                        return (i);
+                i++;
+        }
+        return (-1);
+}
+
+void clear(t_lemin *lemin,t_path *newpath ,int roomto)
+{
+        t_path *path;
+
+        path = newpath;
+        while (path != NULL && path->to != roomto)
+        {
+                lemin->mass[path->from][path->to] = 1;
+                lemin->mass[path->to][path->from] = 1;
+                path = path->next;
+        }
+        cleanpath(&newpath);
+}
+
+t_paths *findcurrentpath(t_paths *head, int i)
+{
+	t_path *path;
+	while(head != NULL)
 	{
-		count = 0;
-		j = 0;
-		while (j < lemin->rooms_count)
+		path = head->headpath;
+		while (path != NULL)
 		{
-			if (lemin->mass[i][j] == -1)
-				count++;
-			j++;
+			if (path->to == i)
+				return (head);
+			path = path->next;
 		}
-		if (count > 1)
-			return (i);
-		i++;
+		head = head->next;
 	}
-	return (-1);
+	return (NULL);
 }
 
-void clean(t_path *nowpath, t_lemin *lemin, int roomto)
+void be3(t_path *path, t_lemin *lemin)
 {
-	while (nowpath != NULL && nowpath->to != roomto)
+	while (path != NULL)
+    {
+        if (lemin->mass[path->to][path->from] == 2 || lemin->mass[path->to][path->from] == 4)
+		{
+			lemin->mass[path->from][path->to] = 4;
+            lemin->mass[path->to][path->from] = 4;
+		}
+		else
+		{
+			lemin->mass[path->from][path->to] = 3;
+			lemin->mass[path->from][path->to] = -1;
+		}
+        path = path->next;
+    }
+}
+
+void delete(t_paths **head, t_paths *todelete)
+{
+	t_paths *now;
+	t_path *current;
+	t_paths *delete;
+
+
+	now = *head;
+	if (now == todelete)
 	{
-		lemin->mass[nowpath->from][nowpath->to] = 1;
-		lemin->mass[nowpath->to][nowpath->from] = 1;
-		nowpath = nowpath->next;
+		current = now->headpath;
+		now->next->headpath = NULL;
+		delete = now;
+		(*head) = (*head)->next;
+		cleanpath(&current);
+		free(delete);
+		return ;
+	}
+	deletep2(head, todelete);
+}
+
+void deletep2(t_paths **head, t_paths *todelete)
+{
+	t_paths *now;
+	int flag;
+	t_path *current;
+	t_paths *delete;
+
+	flag = 1;
+	now = *head;
+	while (now != NULL && now->next != NULL && flag == 1)
+	{
+		if (now->next == todelete)
+			flag = 0;
+		if (flag == 1)
+			now = now->next;
+	}
+	if (flag == 0)
+	{
+		current = now->next->headpath;
+		now->next->headpath = NULL;
+		delete = now->next;
+		now->next = now->next->next;
+		cleanpath(&current);
+		free(delete);
 	}
 }
 
-void helpfunc(t_lemin *lemin, t_path *newpath, int roomto)
+void addspec(t_paths *head, t_paths *new)
 {
-	clean(newpath, lemin, roomto);
-	cleanpath(&newpath);
+	if (head == NULL)
+		return ;
+	while (head->next != NULL)
+		head = head->next;
+	head->next = new;
 }
