@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   solv_p4.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: bcolossu <bcolossu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 18:31:07 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/10/28 20:08:56 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/10/31 17:15:37 by bcolossu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,12 @@ void	processqueue(t_lemin *lem, t_queue **queue, int *visit)
 	}
 }
 
-char *namebyindex(t_room *rooms, int index)
+char	*namebyindex(t_room *rooms, int index)
 {
 	if (rooms->index == index)
 		return (rooms->name);
 	else
 		return namebyindex(rooms->next, index);
-	
 }
 
 t_pathtosolve	*getshortpath(t_pathsolver *pathsolver)

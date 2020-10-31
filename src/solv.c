@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   solv.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: bcolossu <bcolossu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 15:44:24 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/10/30 16:38:14 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/10/31 18:08:44 by bcolossu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void mainsolver(t_lemin *lemin)
 {
 	t_solution *solution_head;
 	t_solution *new;
-	//t_paths *now;
+	t_paths *now;
 	int i;
 
 	i = 1;
@@ -81,7 +81,13 @@ void mainsolver(t_lemin *lemin)
 	//правильное решение всегда лежит в new!)
 	lemin->bestsolution = findbest(lemin);
 	new = lemin->bestsolution;
-	/*
+	i = 0;
+	while (i < lemin->rooms_count)
+	{
+		ft_printf("%d\n", lemin->mass[lemin->start->index][i]);
+		i++;
+	}
+	
 	ft_printf("%d\n", new->movements);
 	ft_printf("%d\n", getcountofpathsswithpathin(new->headpaths));
 	now = new->headpaths;
@@ -93,5 +99,5 @@ void mainsolver(t_lemin *lemin)
 		printpath(now->headpath, lemin);
 		now = now->next;
 		i++;
-	}*/
+	}
 }

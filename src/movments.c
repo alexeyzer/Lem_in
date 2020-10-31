@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movments.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: bcolossu <bcolossu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/27 12:45:47 by aguiller          #+#    #+#             */
-/*   Updated: 2020/10/30 16:33:13 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/10/31 17:32:32 by bcolossu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int getmovements(t_paths *head_ofpaths, int n)
 {
     int movements;
     t_paths *now;
+	int count;
 
     now = head_ofpaths;
     if (getcountofpathsswithpathin(head_ofpaths) > 1)
@@ -27,7 +28,8 @@ int getmovements(t_paths *head_ofpaths, int n)
         movements = movements + getlenpath(now->headpath) + (now->ants_go) - 1;
         now = now->next;
     }
-    return (movements / getcountofpathsswithpathin(head_ofpaths));
+	count = getcountofpathsswithpathin(head_ofpaths);
+    return ((movements / count) + (movements % count));
 }
 
 void getantsmany(t_paths *head_ofpaths, int n, t_paths *now, t_paths *compareto)

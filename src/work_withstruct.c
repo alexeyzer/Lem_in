@@ -3,27 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   work_withstruct.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: bcolossu <bcolossu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/18 16:09:53 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/10/21 10:59:14 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/10/31 17:15:28 by bcolossu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-t_room *addrooms(t_lemin **lemin, char **str)
+t_room	*addrooms(t_lemin **lemin, char **str)
 {
-	t_room *rooms;
-	t_room 	*first;
+	t_room	*rooms;
+	t_room	*first;
 
 	rooms = (*lemin)->rooms;
 	while (rooms->next != NULL)
 		rooms = rooms->next;
 	first = createroom(str, lemin);
 	rooms->next = first;
-	return (first);
-	
+	return (first);	
 }
 
 t_room	*createroom(char **str, t_lemin **lemin)

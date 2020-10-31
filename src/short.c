@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   short.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: bcolossu <bcolossu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 21:33:56 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/10/29 20:02:12 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/10/31 17:16:09 by bcolossu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	makeshort(t_pathsolver *pathsolver, t_lemin *lemin)
 				else if (pathsolver->pathtosolve->path_solver->len_path == 2147483647)
 				{
 					pathsolver->len_path = 2147483647;
-					break;
+					break ;
 				}
 				else
 					makeshort(pathsolver->pathtosolve->path_solver, lemin);
@@ -41,7 +41,7 @@ void	makeshort(t_pathsolver *pathsolver, t_lemin *lemin)
 		pathsolver->len_path = 2147483647;
 }
 
-void connectpath(t_pathsolver *pathsolver, t_lemin *lemin)
+void	connectpath(t_pathsolver *pathsolver, t_lemin *lemin)
 {
 	if (pathsolver->pathtosolve->path_solver->len_path == 2147483647)
 		pathsolver->len_path = 2147483647;
@@ -55,7 +55,7 @@ void connectpath(t_pathsolver *pathsolver, t_lemin *lemin)
 	cleanpathtosolve(&(pathsolver->pathtosolve));
 }
 
-void chosebest(t_pathsolver *pathsolver, t_lemin *lemin)
+void	chosebest(t_pathsolver *pathsolver, t_lemin *lemin)
 {
 	t_pathtosolve	*pathtosolve;
 
