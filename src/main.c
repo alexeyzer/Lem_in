@@ -40,7 +40,7 @@ int		main(int argc, char **argv)
 	parsing(fd, &lemin);
 	isvalid(&lemin);
 	mainsolver(lemin);
-	//fileprint(lemin);
+	fileprint(lemin);
 	//visual(lemin);
 	ants_go(lemin);
 	exitlem(&lemin, NULL, NULL);
