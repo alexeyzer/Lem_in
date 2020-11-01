@@ -83,27 +83,18 @@ void	c_clear(t_room *head)
 
 void	visual(t_lemin *lemin)
 {
+	t_paths *now;
 	int i;
-	int j;
 
-	i = 0;
-	while (i < lemin->rooms_count)
+	i = 1;
+	now = lemin->head_solution->headpaths;
+	while (now != NULL)
 	{
-		ft_printf("[%d] ", i);
-		i++;
-	}
-	ft_printf("\n");
-	i = 0;
-	while (i < lemin->rooms_count)
-	{
-		j = 0;
-		ft_printf("[%d] ", i);
-		while (j < lemin->rooms_count)
-		{
-			ft_printf("%d ", lemin->mass[i][j]);
-			j++;
-		}
-		ft_printf("\n");
+		ft_printf("path %d\n", i);
+		ft_printf("ants to go %d\n", now->ants_go);
+		ft_printf("len of path %d\n", now->len_path);
+		printpath(now->headpath, lemin);
+		now = now->next;
 		i++;
 	}
 }

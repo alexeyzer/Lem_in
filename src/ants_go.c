@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 11:49:16 by andrew            #+#    #+#             */
-/*   Updated: 2020/10/31 23:30:51 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/11/01 09:28:05 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,7 @@ void	ants_go(t_lemin *lemin)
 	int		ant;
 	t_paths *paths;
 
-	paths = lemin->bestsolution->headpaths;
+	paths = lemin->head_solution->headpaths;
 	ant = 1;
 	while (ant < lemin->ants_count + 1)
 	{
@@ -187,11 +187,11 @@ void	ants_go(t_lemin *lemin)
 			paths = paths->next;
 		}
 		ft_printf("\n");
-		paths = lemin->bestsolution->headpaths;
+		paths = lemin->head_solution->headpaths;
 	}
-	while (!is_path_clear(lemin->bestsolution->headpaths))
+	while (!is_path_clear(lemin->head_solution->headpaths))
 	{
-		paths = lemin->bestsolution->headpaths;
+		paths = lemin->head_solution->headpaths;
 		while (paths != NULL)
 		{
 			move_ants_second(lemin, paths->headpath);

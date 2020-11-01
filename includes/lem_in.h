@@ -78,7 +78,6 @@ typedef struct	s_lemin
 	struct	s_room	*start;
 	struct	s_room	*end;
 	struct  s_solution *head_solution;
-	struct  s_solution *bestsolution;
 	int				**mass;
 	int				connection;
 	double				ants_count;
@@ -152,7 +151,7 @@ int				checkperesech(t_lemin *lemin);
 int				checksamerooms(t_lemin *lemin);
 void			dellperesech(t_lemin	*lemin);
 t_paths			*givepaths(t_lemin *lemin);
-t_solution		*findbest(t_lemin *lemin);
+void			findbest(t_lemin *lemin);
 t_paths			*becomelastpaths(t_paths *head);
 void		newsolution(t_lemin *lemin, t_solution *lastsolution);
 int				connectpathspecial(t_lemin *lemin, int index, t_path *now_path);

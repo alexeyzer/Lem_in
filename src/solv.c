@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 15:44:24 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/10/31 22:54:57 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/11/01 09:25:41 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,33 +70,8 @@ t_path	*solv_path(t_lemin *lemin)
 void mainsolver(t_lemin *lemin)
 {
 	t_solution *solution_head;
-	t_solution *new;
-	//t_paths *now;
-	int i;
 
-	i = 1;
 	solution_head = createsolution(createpaths(solv_path(lemin)));
 	lemin->head_solution = solution_head;
-	//правильное решение всегда лежит в new!)
-	lemin->bestsolution = findbest(lemin);
-	new = lemin->bestsolution;
-	//i = 0;
-	//while (i < lemin->rooms_count)
-	//{
-	//	ft_printf("%d\n", lemin->mass[lemin->start->index][i]);
-	//	i++;
-	//}
-	
-	//ft_printf("%d\n", new->movements);
-	//ft_printf("%d\n", getcountofpathsswithpathin(new->headpaths));
-	/*now = new->headpaths;
-	while (now != NULL)
-	{
-		ft_printf("path %d\n", i);
-		ft_printf("ants to go %d\n", now->ants_go);
-		ft_printf("len of path %d\n", now->len_path);
-		printpath(now->headpath, lemin);
-		now = now->next;
-		i++;
-	}*/
+	findbest(lemin);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movments.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/27 12:45:47 by aguiller          #+#    #+#             */
-/*   Updated: 2020/10/31 19:59:58 by aguiller         ###   ########.fr       */
+/*   Updated: 2020/11/01 09:29:25 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,15 +75,8 @@ void getantsmany(int n, t_paths *head)
 
 void getants(t_paths *head_ofpaths, int n)
 {
-    t_paths *now;
-    t_paths *compareto;
-
-    now = head_ofpaths;
     if (getcountofpathsswithpathin(head_ofpaths) > 1)
-    {
-        compareto = now->next;
-        getantsmany(n, now);
-    }
+        getantsmany(n, head_ofpaths);
     else
         head_ofpaths->ants_go = n;
 }
@@ -129,21 +122,4 @@ void sortpaths(t_paths *head)
         }
         i++;
     }
-}
-
-t_paths *compare(t_paths *head_ofpaths, t_paths *now, t_paths *compareto)
-{
-    t_paths *nowiter;
-    int prev;
-
-    nowiter = head_ofpaths;
-    while (nowiter != now)
-    {
-        prev = nowiter->ants_go + getlenpath(nowiter->headpath);
-        if (prev <= compareto->ants_go + getlenpath(compareto->headpath)
-            && prev <= now->ants_go + getlenpath(now->headpath))
-            return (nowiter);
-        nowiter = nowiter->next;
-    }
-    return (NULL);
 }
