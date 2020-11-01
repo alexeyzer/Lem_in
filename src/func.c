@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 11:11:25 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/10/28 19:10:27 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/11/01 10:40:42 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,26 +94,24 @@ void antscheck(int fd, char **line, t_lemin **lemin)
 {
 	while (specialgetnextlin(fd, &(*line), *lemin))
 	{
-		if (*line == NULL || **line == '\0')
-			exitlem(lemin, "Error\n", line);
 		if ((*line)[0] == '#' && (*line)[1] != '#')
-			ft_strdel(line);
+			exitlem(lemin, "ERROR: no ants\n", line);
 		else if (ft_strcmp(*line, "##start") == 0)
-			exitlem(lemin, "Error no ants\n", line);
+			exitlem(lemin, "ERROR: no ants\n", line);
 		else if (ft_strcmp(*line, "##end") == 0)
-			exitlem(lemin, "Error no ants\n", line);
+			exitlem(lemin, "ERROR: no ants\n", line);
 		else if ((*line)[0] == '#' && (*line)[1] == '#')
 			ft_strdel(line);
 		else if	(ft_isnb(*line) > 0)
 			break;
 		else
-			exitlem(lemin, "Error no ants\n", line);
+			exitlem(lemin, "ERROR: no ants\n", line);
 		ft_strdel(line);
 	}
 	if (*line == NULL || **line == '\0')
-		exitlem(lemin, "Error\n", line);
+		exitlem(lemin, "ERROR\n", line);
 	(*lemin)->ants_count = ft_atoi(*line);
 	if ((*lemin)->ants_count <= 0 || (*lemin)->ants_count > 2147483647)
-		exitlem(lemin, "Error with ants\n", line);
+		exitlem(lemin, "ERROR: with ants\n", line);
 	ft_strdel(line);
 }

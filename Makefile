@@ -23,7 +23,7 @@ LIB_H =	-I libftprintf/libft/
 
 SRCS=$(addprefix $(SRC_DIR), $(SRC))
 
-NAME = Lem-in
+NAME = lem-in
 
 OBJ = $(SRCS:%.c=%.o)
 

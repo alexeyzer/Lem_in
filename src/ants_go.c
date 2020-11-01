@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/30 11:49:16 by andrew            #+#    #+#             */
-/*   Updated: 2020/11/01 09:28:05 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/11/01 09:49:49 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ void	ant_to_path(t_lemin *lemin, t_paths *paths, int *ant)
 	char	*room;
 
 	move_ants_second(lemin, paths->headpath);
-	if (paths->ants_go && !paths->headpath->ant)
+	if (paths->ants_go && (!paths->headpath->ant || paths->headpath->to == lemin->end->index))
 	{
 		paths->headpath->ant = *ant;
 		room = find_room(lemin->rooms, paths->headpath->to);
@@ -179,7 +179,7 @@ void	ants_go(t_lemin *lemin)
 
 	paths = lemin->head_solution->headpaths;
 	ant = 1;
-	while (ant < lemin->ants_count + 1)
+	while (ant <= lemin->ants_count)
 	{
 		while (paths)
 		{

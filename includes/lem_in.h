@@ -169,4 +169,5 @@ void			be3(t_path *path, t_lemin *lemin);
 void			delete(t_paths **head, t_paths *todelete);
 void			deletep2(t_paths **head, t_paths *todelete);
 void			addspec(t_paths *head, t_paths *new);
+void			fileprint(t_lemin *lemin);
 #endif

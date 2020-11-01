@@ -6,7 +6,7 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 16:00:40 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/11/01 09:32:47 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/11/01 10:22:18 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,16 @@ void scpecialclearqueue(t_queue **head)
     }
     free(*head);
     *head = NULL;
+}
+
+void fileprint(t_lemin *lemin)
+{
+	t_file *now;
+
+	now = lemin->head_file;
+	while (now != NULL)
+	{
+		ft_printf("%s\n", now->line);
+		now = now->next;
+	}
 }
