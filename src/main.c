@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrew <andrew@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 09:50:12 by andrew            #+#    #+#             */
-/*   Updated: 2020/11/02 12:24:02 by andrew           ###   ########.fr       */
+/*   Updated: 2020/11/02 15:16:55 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ int		main(int argc, char **argv)
 
 	lemin = NULL;
 	fd = 0;
-	if (argc == 2)
+	if (argc == 2 || argc == 3)
 	{
 		fd = open(argv[1], O_RDONLY);
 		if (fd < 0)
 		{
-			ft_printf("Invalid file\n");
+			ft_printf("ERROR: Invalid file\n");
 			return (0);
 		}
 	}
@@ -52,6 +52,8 @@ int		main(int argc, char **argv)
 	isvalid(&lemin);
 	mainsolver(lemin);
 	fileprint(lemin);
+	if (argc == 3 && argv[2][0] == '-' && argv[2][1] == 'p')
+		visual(lemin);
 	ants_go(lemin);
 	exitlem(&lemin, NULL, NULL);
 	return (0);
@@ -67,6 +69,7 @@ void	exitlem(t_lemin **lemin, char *str, char **str_tofree)
 		ft_printf("%s", str);
 	if (*lemin != NULL)
 	{
+		clearsolution(*lemin);
 		cleanfile(((*lemin)->head_file));
 		head = (*lemin)->rooms;
 		(*lemin)->rooms = NULL;

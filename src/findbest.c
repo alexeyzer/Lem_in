@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   findbest.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrew <andrew@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 14:45:09 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/11/02 09:57:23 by andrew           ###   ########.fr       */
+/*   Updated: 2020/11/02 13:21:32 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	findbest(t_lemin *lemin)
 void	newsolution(t_lemin *lemin, t_solution *lastsolution)
 {
 	t_path	*newpath;
-	int		i;
 
 	newpath = solv_path(lemin);
 	if (newpath == NULL)
@@ -37,10 +36,7 @@ void	newsolution(t_lemin *lemin, t_solution *lastsolution)
 		cleanpath(&newpath);
 	}
 	else if (checksamerooms(lemin) < 0)
-	{
-		if ((i = checkperesech(lemin)) == -1)
-			addpathtopaths(lastsolution->headpaths, newpath);
-	}
+		addpathtopaths(lastsolution->headpaths, newpath);
 }
 
 void	addpathtomass(t_lemin *lemin, t_path *solved_path)
@@ -51,26 +47,6 @@ void	addpathtomass(t_lemin *lemin, t_path *solved_path)
 		lemin->mass[solved_path->to][solved_path->from] = 3;
 		solved_path = solved_path->next;
 	}
-}
-
-int		checkperesech(t_lemin *lemin)
-{
-	int i;
-	int j;
-
-	i = 0;
-	while (i < lemin->rooms_count)
-	{
-		j = 0;
-		while (j < lemin->rooms_count)
-		{
-			if (lemin->mass[i][j] == 2 && lemin->mass[j][i] == 2)
-				return (i);
-			j++;
-		}
-		i++;
-	}
-	return (-1);
 }
 
 int		checksamerooms(t_lemin *lemin)
@@ -86,7 +62,7 @@ int		checksamerooms(t_lemin *lemin)
 		j = 0;
 		while (j < lemin->rooms_count)
 		{
-			if (lemin->mass[i][j] == -1)
+			if (lemin->mass[i][j] == 3)
 				count++;
 			j++;
 		}

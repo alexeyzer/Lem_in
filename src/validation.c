@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrew <andrew@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 15:21:51 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/11/02 12:18:42 by andrew           ###   ########.fr       */
+/*   Updated: 2020/11/02 13:24:49 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	isvalid(t_lemin **lemin)
 {
 	if ((*lemin)->start == NULL || (*lemin)->end == NULL)
-		exitlem(lemin, "Error no start or end", NULL);
+		exitlem(lemin, "ERROR: no start or end\n", NULL);
 	findpathtoend(lemin);
 }
 
@@ -27,7 +27,7 @@ void	findpathtoend(t_lemin **lemin)
 	if (find(&massive, (*lemin)->start->index, *lemin) == 0)
 	{
 		free(massive);
-		exitlem(lemin, "Error no path from start to end", NULL);
+		exitlem(lemin, "ERROR: no path from start to end\n", NULL);
 	}
 	free(massive);
 }

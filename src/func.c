@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   func.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrew <andrew@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 11:11:25 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/11/02 09:59:52 by andrew           ###   ########.fr       */
+/*   Updated: 2020/11/02 15:30:10 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,9 @@ void	addconnect(t_lemin **lemin, char *str)
 		i++;
 	index1 = getindex(lemin, str);
 	index2 = getindex(lemin, str + i + 1);
+	if ((*lemin)->mass[index1][index2] == 1 ||
+		(*lemin)->mass[index2][index1] == 1)
+		exitlem(lemin, "ERROR: link duplicate\n", &str);
 	(*lemin)->mass[index1][index2] = 1;
 	(*lemin)->mass[index2][index1] = 1;
 }
@@ -90,7 +93,7 @@ int		getindex(t_lemin **lemin, char *str)
 
 void	antscheck(int fd, char **line, t_lemin **lemin)
 {
-	while (specialgetnextlin(fd, &(*line), *lemin))
+	while (specialgetnextlin(fd, &(*line), *lemin) > 0)
 	{
 		if ((*line)[0] == '#' && (*line)[1] != '#')
 			exitlem(lemin, "ERROR: no ants\n", line);

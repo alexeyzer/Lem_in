@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   solv_p2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrew <andrew@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 17:19:32 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/11/02 12:14:11 by andrew           ###   ########.fr       */
+/*   Updated: 2020/11/02 13:21:07 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void			addpaths(t_lemin *l, t_queue **queue, int *v, t_pathsolver *now)
 	run = 1;
 	while (i < l->rooms_count && run)
 	{
-		if ((l->mass[now->index][i] == 1 || l->mass[now->index][i] == -1)
+		if ((l->mass[now->index][i] == 1)
 			&& v[i] == 0)
 		{
 			if (i == l->end->index)

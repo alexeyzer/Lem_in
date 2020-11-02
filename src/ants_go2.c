@@ -3,65 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ants_go2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrew <andrew@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 13:08:50 by andrew            #+#    #+#             */
-/*   Updated: 2020/11/02 13:10:06 by andrew           ###   ########.fr       */
+/*   Updated: 2020/11/02 15:26:33 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
-int		ant_scan_f(t_path *path)
-{
-	t_path *p;
-
-	p = path->next;
-	while (p)
-	{
-		if (p->ant)
-			return (1);
-		p = p->next;
-	}
-	return (0);
-}
-
-int		ant_scan_b(t_path *path)
-{
-	t_path *p;
-
-	p = path->prev;
-	while (p)
-	{
-		if (p->ant)
-			return (1);
-		p = p->prev;
-	}
-	return (0);
-}
-
-void	move_ants(t_lemin *lemin, t_path *path)
-{
-	t_path	*current;
-
-	while (path->ant)
-	{
-		current = path;
-		while (current->next)
-		{
-			if (current->ant && !current->next->ant \
-			&& (!current->prev || current->prev->ant))
-				push(current, lemin);
-			if (current->ant && current->next->ant \
-			&& !current->next->next)
-				push(current, lemin);
-			if (!ant_scan_b(current) && !current->next->ant \
-			&& ant_scan_f(current))
-				push(current, lemin);
-			current = current->next;
-		}
-	}
-}
 
 int		is_path_clear(t_paths *paths)
 {
@@ -94,4 +43,37 @@ int		isallpathsclear(t_paths *headpaths)
 		headpaths = headpaths->next;
 	}
 	return (result);
+}
+
+t_path	*getpathbyparam(t_path *path, int to, int from)
+{
+	while (path != NULL)
+	{
+		if (path->from == from && path->to == to)
+			return (path);
+		path = path->next;
+	}
+	return (NULL);
+}
+
+t_path	*getlustpath(t_path *path)
+{
+	t_path	*now;
+	int		to;
+	int		from;
+
+	now = path;
+	to = -1;
+	from = -1;
+	while (now != NULL)
+	{
+		if (now->ant && now->next != NULL)
+		{
+			to = now->to;
+			from = now->from;
+		}
+		now = now->next;
+	}
+	now = getpathbyparam(path, to, from);
+	return (now);
 }

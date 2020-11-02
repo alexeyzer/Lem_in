@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrew <andrew@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 12:54:56 by andrew            #+#    #+#             */
-/*   Updated: 2020/11/02 12:59:26 by andrew           ###   ########.fr       */
+/*   Updated: 2020/11/02 15:16:17 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,4 +187,6 @@ void			delete(t_paths **head, t_paths *todelete);
 void			deletep2(t_paths **head, t_paths *todelete);
 void			addspec(t_paths *head, t_paths *new);
 void			fileprint(t_lemin *lemin);
+void			push(t_path *current, t_lemin *lemin);
+void			clearsolution(t_lemin *lemin);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movments.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrew <andrew@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/27 12:45:47 by aguiller          #+#    #+#             */
-/*   Updated: 2020/11/02 12:34:42 by andrew           ###   ########.fr       */
+/*   Updated: 2020/11/02 13:35:00 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ int		getmovements(t_paths *head_ofpaths, int n)
 	int		count;
 
 	now = head_ofpaths;
-	if (getcountofpathsswithpathin(head_ofpaths) > 1)
-		sortpaths(head_ofpaths, 0);
 	getants(head_ofpaths, n);
 	movements = 0;
 	while (now != NULL)

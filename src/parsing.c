@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrew <andrew@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/15 16:29:08 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/11/02 12:11:55 by andrew           ###   ########.fr       */
+/*   Updated: 2020/11/02 13:25:48 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	parsing(int fd, t_lemin **lemin)
 	while (specialgetnextlin(fd, &line, *lemin) > 0)
 	{
 		if (*line == '\0')
-			exitlem(lemin, "Error empty line\n", &line);
+			exitlem(lemin, "ERROR: empty line\n", &line);
 		if (line[0] == '#' && line[1] != '#')
 			ft_strdel(&line);
 		else if ((status = isitroom(&line, lemin)) > 0)
@@ -39,9 +39,9 @@ void	parstostruct(int fd, t_lemin **lemin, char **str, int status)
 	if ((status == 1 || status == 2) && (*lemin)->connection == 0)
 	{
 		if (status == 1 && (*lemin)->start != NULL)
-			exitlem(lemin, "Error 2 starts\n", str);
+			exitlem(lemin, "ERROR: 2 starts\n", str);
 		if (status == 2 && (*lemin)->end != NULL)
-			exitlem(lemin, "Error 2 ends\n", str);
+			exitlem(lemin, "ERROR: 2 ends\n", str);
 		startend(fd, lemin, str, status);
 	}
 	else
@@ -56,7 +56,7 @@ void	parstostruct2(int fd, t_lemin **lemin, char **str, int status)
 	else if (status == 4)
 		connection(lemin, str);
 	else
-		exitlem(lemin, "Error\n", str);
+		exitlem(lemin, "ERROR\n", str);
 }
 
 int		isitroom(char **str, t_lemin **lemin)
@@ -91,16 +91,16 @@ int		isitroom2(char **str, t_lemin **lemin, int i)
 			i++;
 		i++;
 		if (ft_isnb(&((*str)[i])) == 0)
-			exitlem(lemin, "Error param room\n", str);
+			exitlem(lemin, "ERROR: param room\n", str);
 		while ((*str)[i] != ' ')
 			i++;
 		i++;
 		if (ft_isnb(&((*str)[i])) == 0)
-			exitlem(lemin, "Error param room\n", str);
+			exitlem(lemin, "ERROR: param room\n", str);
 		return (3);
 	}
 	else if (probel == 0)
 		return (4);
-	exitlem(lemin, "param Error\n", str);
+	exitlem(lemin, "ERROR: param\n", str);
 	return (0);
 }

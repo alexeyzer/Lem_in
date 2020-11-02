@@ -12,7 +12,7 @@
 
 SRC = main.c parsing.c work_withstruct.c parsing_p2.c func.c validation.c \
 		solv.c solv_p2.c solv_p3.c solv_p4.c short.c pathsandsolutions.c \
-		movments.c store.c findbest.c findbest_p2.c ants_go.c ants_go2 ants_go3 \
+		movments.c store.c findbest.c findbest_p2.c ants_go.c ants_go2.c \
 		short2.c get_ants.c
 
 SRC_DIR = src/

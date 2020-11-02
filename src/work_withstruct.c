@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   work_withstruct.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrew <andrew@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/18 16:09:53 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/11/02 12:27:02 by andrew           ###   ########.fr       */
+/*   Updated: 2020/11/02 13:29:05 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_room	*createroom(char **str, t_lemin **lemin, int i)
 	if ((checkroom(lemin, first->coord_x, first->coord_y, first->name) < 0))
 	{
 		free(first);
-		exitlem(lemin, "Error wrong room params", str);
+		exitlem(lemin, "ERROR: wrong room params\n", str);
 	}
 	if ((*lemin)->rooms == NULL)
 		first->index = 0;

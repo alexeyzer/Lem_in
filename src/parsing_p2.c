@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_p2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrew <andrew@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 16:57:06 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/11/02 12:25:36 by andrew           ###   ########.fr       */
+/*   Updated: 2020/11/02 13:40:17 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,8 @@ void	startend(int fd, t_lemin **lemin, char **str, int status)
 
 	old_status = status;
 	ft_strdel(str);
-	while (specialgetnextlin(fd, str, *lemin))
+	while (specialgetnextlin(fd, str, *lemin) > 0)
 	{
-		if (*str == NULL || **str == '\0')
-			exitlem(lemin, "Error\n", str);
 		if ((*str)[0] == '#' && (*str)[1] != '#')
 			ft_strdel(str);
 		else if (ft_strcmp(*str, "##start") == 0)
@@ -34,9 +32,11 @@ void	startend(int fd, t_lemin **lemin, char **str, int status)
 			break ;
 		ft_strdel(str);
 	}
+	if (*str == NULL || **str == '\0')
+		exitlem(lemin, "ERROR: empty line\n", str);
 	status = isitroom2(str, lemin, 0);
 	if (status == 1 || status == 2 || status == 4)
-		exitlem(lemin, "error, wrong format\n", str);
+		exitlem(lemin, "ERROR: wrong format\n", str);
 	else
 		add(lemin, old_status, str);
 }
@@ -74,7 +74,7 @@ void	connection(t_lemin **lemin, char **str)
 	if ((*lemin)->connection == 0)
 	{
 		if ((*lemin)->rooms == NULL)
-			exitlem(lemin, "Error\n", str);
+			exitlem(lemin, "ERROR\n", str);
 		(*lemin)->rooms_count = lastroom((*lemin)->rooms)->index + 1;
 		checkconnect(lemin, str);
 		initmass(lemin);
@@ -107,7 +107,7 @@ void	checkconnect(t_lemin **lemin, char **str)
 	{
 		ft_strdel(&name1);
 		ft_strdel(&name2);
-		exitlem(lemin, "Error connection\n", str);
+		exitlem(lemin, "ERROR: connection\n", str);
 	}
 	else
 	{
