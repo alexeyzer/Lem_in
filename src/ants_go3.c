@@ -1,48 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   findbest_p2.c                                      :+:      :+:    :+:   */
+/*   ants_go3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: andrew <andrew@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/28 16:00:40 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/11/02 09:52:44 by andrew           ###   ########.fr       */
+/*   Created: 2020/11/02 12:39:27 by andrew            #+#    #+#             */
+/*   Updated: 2020/11/02 12:39:43 by andrew           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-int		findspecial(t_lemin *lemin)
+t_path	*getpathbyparam(t_path *path, int to, int from)
 {
-	int *massive;
-	int result;
-
-	result = 0;
-	massive = massvisited(lemin);
-	result = find(&massive, lemin->start->index, lemin);
-	free(massive);
-	return (result);
-}
-
-void	scpecialclearqueue(t_queue **head)
-{
-	while ((*head)->next != NULL)
+	while (path)
 	{
-		scpecialclearqueue(&((*head)->next));
-		(*head)->next = NULL;
+		if (path->from == from && path->to == to)
+			return (path);
+		path = path->next;
 	}
-	free(*head);
-	*head = NULL;
+	return (NULL);
 }
 
-void	fileprint(t_lemin *lemin)
+t_path	*getlustpath(t_path *path)
 {
-	t_file *now;
+	t_path	*now;
+	int		to;
+	int		from;
 
-	now = lemin->head_file;
+	now = path;
 	while (now != NULL)
 	{
-		ft_printf("%s\n", now->line);
+		if (now->ant && now->next != NULL)
+		{
+			to = now->to;
+			from = now->from;
+		}
 		now = now->next;
 	}
+	now = getpathbyparam(path, to, from);
+	return (now);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   solv.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: andrew <andrew@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 15:44:24 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/11/01 09:25:41 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/11/02 12:16:39 by andrew           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_pathsolver	*createpathsolver(int index)
 	return (pathsolver);
 }
 
-t_queue *createqueue()
+t_queue			*createqueue(void)
 {
 	t_queue *queue;
 
@@ -36,17 +36,17 @@ t_queue *createqueue()
 	return (queue);
 }
 
-void queueadd(t_queue	*queue, t_pathsolver *pathsolver)
+void			queueadd(t_queue *queue, t_pathsolver *pathsolver)
 {
 	if (queue == NULL)
 		return ;
-	while(queue->next != NULL)
+	while (queue->next != NULL)
 		queue = queue->next;
 	queue->next = createqueue();
 	queue->next->path_solver = pathsolver;
 }
 
-t_path	*solv_path(t_lemin *lemin)
+t_path			*solv_path(t_lemin *lemin)
 {
 	t_queue			*queue;
 	t_pathsolver	*pathsolver;
@@ -67,7 +67,7 @@ t_path	*solv_path(t_lemin *lemin)
 	return (path);
 }
 
-void mainsolver(t_lemin *lemin)
+void			mainsolver(t_lemin *lemin)
 {
 	t_solution *solution_head;
 

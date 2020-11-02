@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   solv_p2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: andrew <andrew@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 17:19:32 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/10/30 15:36:43 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/11/02 12:14:11 by andrew           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-t_pathtosolve *createpathtosolve(int index, t_queue *queue)
+t_pathtosolve	*createpathtosolve(int index, t_queue *queue)
 {
 	t_pathtosolve *head_paths;
 
@@ -25,7 +25,8 @@ t_pathtosolve *createpathtosolve(int index, t_queue *queue)
 	return (head_paths);
 }
 
-int	createitog(int to, t_pathsolver *now, t_queue **queue, t_lemin *lemin)
+int				createitog(int to, t_pathsolver *now, \
+t_queue **queue, t_lemin *lemin)
 {
 	if (now->pathtosolve != NULL)
 		cleanpathtosolve(&(now->pathtosolve));
@@ -36,21 +37,21 @@ int	createitog(int to, t_pathsolver *now, t_queue **queue, t_lemin *lemin)
 	return (0);
 }
 
-void cleanpathtosolve(t_pathtosolve **head)
+void			cleanpathtosolve(t_pathtosolve **head)
 {
 	if (*head == NULL)
 		return ;
-	while((*head)->next != NULL)
-    {
-        cleanpathtosolve(&((*head)->next));
-        (*head)->next = NULL;
-    }
+	while ((*head)->next != NULL)
+	{
+		cleanpathtosolve(&((*head)->next));
+		(*head)->next = NULL;
+	}
 	cleanpathsolver(&((*head)->path_solver));
-    free(*head);
-    *head = NULL;
+	free(*head);
+	*head = NULL;
 }
 
-void addpathstosolve(t_pathtosolve *paths, int index, t_queue *queue)
+void			addpathstosolve(t_pathtosolve *paths, int index, t_queue *queue)
 {
 	if (paths == NULL)
 		return ;
@@ -59,7 +60,7 @@ void addpathstosolve(t_pathtosolve *paths, int index, t_queue *queue)
 	paths->next = createpathtosolve(index, queue);
 }
 
-void addpaths(t_lemin *l, t_queue **queue, int *v, t_pathsolver *now)
+void			addpaths(t_lemin *l, t_queue **queue, int *v, t_pathsolver *now)
 {
 	int i;
 	int run;

@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: andrew <andrew@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/02 09:50:12 by andrew            #+#    #+#             */
+/*   Updated: 2020/11/02 12:24:02 by andrew           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "lem_in.h"
 
@@ -41,7 +52,6 @@ int		main(int argc, char **argv)
 	isvalid(&lemin);
 	mainsolver(lemin);
 	fileprint(lemin);
-	//visual(lemin);
 	ants_go(lemin);
 	exitlem(&lemin, NULL, NULL);
 	return (0);
@@ -85,8 +95,8 @@ void	c_clear(t_room *head)
 
 void	visual(t_lemin *lemin)
 {
-	t_paths *now;
-	int i;
+	t_paths	*now;
+	int		i;
 
 	i = 1;
 	now = lemin->head_solution->headpaths;

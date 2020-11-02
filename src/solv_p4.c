@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   solv_p4.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcolossu <bcolossu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andrew <andrew@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 18:31:07 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/10/31 17:15:37 by bcolossu         ###   ########.fr       */
+/*   Updated: 2020/11/02 12:15:05 by andrew           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void	processqueue(t_lemin *lem, t_queue **queue, int *visit)
+void			processqueue(t_lemin *lem, t_queue **queue, int *visit)
 {
 	t_queue *old;
 
@@ -31,18 +31,18 @@ void	processqueue(t_lemin *lem, t_queue **queue, int *visit)
 	}
 }
 
-char	*namebyindex(t_room *rooms, int index)
+char			*namebyindex(t_room *rooms, int index)
 {
 	if (rooms->index == index)
 		return (rooms->name);
 	else
-		return namebyindex(rooms->next, index);
+		return (namebyindex(rooms->next, index));
 }
 
 t_pathtosolve	*getshortpath(t_pathsolver *pathsolver)
 {
-	int min;
-	t_pathtosolve *pathtosolve;
+	int				min;
+	t_pathtosolve	*pathtosolve;
 
 	pathtosolve = pathsolver->pathtosolve;
 	min = pathtosolve->path_solver->len_path;
@@ -57,7 +57,7 @@ t_pathtosolve	*getshortpath(t_pathsolver *pathsolver)
 	return (pathtosolve);
 }
 
-int getlenpath(t_path *head)
+int				getlenpath(t_path *head)
 {
 	int i;
 
@@ -70,7 +70,7 @@ int getlenpath(t_path *head)
 	return (i);
 }
 
-void printpath(t_path *head, t_lemin *lemin)
+void			printpath(t_path *head, t_lemin *lemin)
 {
 	ft_printf("%s->", namebyindex(lemin->rooms, head->from));
 	while (head != NULL)

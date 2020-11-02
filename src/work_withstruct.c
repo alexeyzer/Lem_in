@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   work_withstruct.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcolossu <bcolossu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: andrew <andrew@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/18 16:09:53 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/10/31 17:15:28 by bcolossu         ###   ########.fr       */
+/*   Updated: 2020/11/02 12:27:02 by andrew           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,15 @@ t_room	*addrooms(t_lemin **lemin, char **str)
 	rooms = (*lemin)->rooms;
 	while (rooms->next != NULL)
 		rooms = rooms->next;
-	first = createroom(str, lemin);
+	first = createroom(str, lemin, 0);
 	rooms->next = first;
-	return (first);	
+	return (first);
 }
 
-t_room	*createroom(char **str, t_lemin **lemin)
+t_room	*createroom(char **str, t_lemin **lemin, int i)
 {
 	t_room *first;
-	int i;
 
-	i = 0;
 	while ((*str)[i] != ' ')
 		i++;
 	if (!(first = malloc(sizeof(t_room))))
@@ -55,7 +53,7 @@ t_room	*createroom(char **str, t_lemin **lemin)
 	return (first);
 }
 
-int	checkroom(t_lemin **lemin, int cx, int cy, char *n)
+int		checkroom(t_lemin **lemin, int cx, int cy, char *n)
 {
 	t_room *rooms;
 
@@ -68,14 +66,15 @@ int	checkroom(t_lemin **lemin, int cx, int cy, char *n)
 		return (-1);
 	if (rooms != NULL)
 	{
-		if (ft_strcmp(n, rooms->name) == 0 || (rooms->coord_x == cx && rooms->coord_y == cy))
+		if (ft_strcmp(n, rooms->name) == 0 || \
+		(rooms->coord_x == cx && rooms->coord_y == cy))
 			return (-1);
 		rooms = rooms->next;
 	}
 	return (1);
 }
 
-t_room *lastroom(t_room *rooms)
+t_room	*lastroom(t_room *rooms)
 {
 	while (rooms->next != NULL)
 		rooms = rooms->next;

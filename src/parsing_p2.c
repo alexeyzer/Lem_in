@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_p2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: andrew <andrew@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 16:57:06 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/10/28 19:22:27 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/11/02 12:25:36 by andrew           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void startend(int fd, t_lemin **lemin, char **str, int status)
+void	startend(int fd, t_lemin **lemin, char **str, int status)
 {
 	int old_status;
 
 	old_status = status;
 	ft_strdel(str);
-	while(specialgetnextlin(fd, str, *lemin))
+	while (specialgetnextlin(fd, str, *lemin))
 	{
 		if (*str == NULL || **str == '\0')
 			exitlem(lemin, "Error\n", str);
@@ -31,23 +31,23 @@ void startend(int fd, t_lemin **lemin, char **str, int status)
 		else if ((*str)[0] == '#' && (*str)[1] == '#')
 			ft_strdel(str);
 		else
-			break;
+			break ;
 		ft_strdel(str);
 	}
 	status = isitroom2(str, lemin, 0);
-	if (status == 1 || status  == 2 || status == 4)
-		exitlem(lemin,"error, wrong format\n", str);
+	if (status == 1 || status == 2 || status == 4)
+		exitlem(lemin, "error, wrong format\n", str);
 	else
 		add(lemin, old_status, str);
 }
 
-void add(t_lemin **lemin, int status, char **str)
+void	add(t_lemin **lemin, int status, char **str)
 {
 	if (status == 1)
 	{
 		if ((*lemin)->rooms == NULL)
 		{
-			(*lemin)->rooms = createroom(str, lemin);
+			(*lemin)->rooms = createroom(str, lemin, 0);
 			(*lemin)->start = (*lemin)->rooms;
 		}
 		else
@@ -57,7 +57,7 @@ void add(t_lemin **lemin, int status, char **str)
 	{
 		if ((*lemin)->rooms == NULL)
 		{
-			(*lemin)->rooms = createroom(str, lemin);
+			(*lemin)->rooms = createroom(str, lemin, 0);
 			(*lemin)->end = (*lemin)->rooms;
 		}
 		else
@@ -66,10 +66,10 @@ void add(t_lemin **lemin, int status, char **str)
 	else if (status == 3 && (*lemin)->rooms != NULL)
 		addrooms(lemin, str);
 	else if (status == 3 && (*lemin)->rooms == NULL)
-		(*lemin)->rooms = createroom(str, lemin);
+		(*lemin)->rooms = createroom(str, lemin, 0);
 }
 
-void connection(t_lemin **lemin, char **str)
+void	connection(t_lemin **lemin, char **str)
 {
 	if ((*lemin)->connection == 0)
 	{
@@ -88,9 +88,9 @@ void connection(t_lemin **lemin, char **str)
 	}
 }
 
-void checkconnect(t_lemin **lemin, char **str)
+void	checkconnect(t_lemin **lemin, char **str)
 {
-	int 	i;
+	int		i;
 	int		i_start;
 	char	*name1;
 	char	*name2;
@@ -98,11 +98,11 @@ void checkconnect(t_lemin **lemin, char **str)
 	i = 0;
 	while ((*str)[i] && (*str)[i] != '-')
 		i++;
-	name1 =ft_strsub(*str, 0, i);
+	name1 = ft_strsub(*str, 0, i);
 	i_start = ++i;
-	while((*str)[i] && (*str)[i] != '\0')
+	while ((*str)[i] && (*str)[i] != '\0')
 		i++;
-	name2 =ft_strsub(*str, i_start, i);
+	name2 = ft_strsub(*str, i_start, i);
 	if (isroom(lemin, name1) < 0 || isroom(lemin, name2) < 0)
 	{
 		ft_strdel(&name1);
@@ -116,7 +116,7 @@ void checkconnect(t_lemin **lemin, char **str)
 	}
 }
 
-int isroom(t_lemin **lemin, char *str)
+int		isroom(t_lemin **lemin, char *str)
 {
 	t_room *rooms;
 

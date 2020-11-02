@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   func.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: andrew <andrew@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 11:11:25 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/11/01 10:40:42 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/11/02 09:59:52 by andrew           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void clearmass(int **mass, int count)
+void	clearmass(int **mass, int count)
 {
 	int i;
 
@@ -26,21 +26,21 @@ void clearmass(int **mass, int count)
 	mass = NULL;
 }
 
-void initmass(t_lemin **lemin)
+void	initmass(t_lemin **lemin)
 {
-    int **massive;
-    int i;
+	int **massive;
+	int i;
 	int j;
 
-    i = 0;
+	i = 0;
 	j = 0;
-    massive = NULL;
-    massive = (int**)malloc(sizeof(int*) * (*lemin)->rooms_count);
-    while (i < (*lemin)->rooms_count)
-    {
-        massive[i] = (int*)malloc(sizeof(int) * (*lemin)->rooms_count);
-        i++;
-    }
+	massive = NULL;
+	massive = (int**)malloc(sizeof(int*) * (*lemin)->rooms_count);
+	while (i < (*lemin)->rooms_count)
+	{
+		massive[i] = (int*)malloc(sizeof(int) * (*lemin)->rooms_count);
+		i++;
+	}
 	i = 0;
 	while (i < (*lemin)->rooms_count)
 	{
@@ -52,10 +52,10 @@ void initmass(t_lemin **lemin)
 		}
 		i++;
 	}
-    (*lemin)->mass = massive;
+	(*lemin)->mass = massive;
 }
 
-void addconnect(t_lemin **lemin, char *str)
+void	addconnect(t_lemin **lemin, char *str)
 {
 	int i;
 	int index1;
@@ -66,16 +66,14 @@ void addconnect(t_lemin **lemin, char *str)
 		i++;
 	index1 = getindex(lemin, str);
 	index2 = getindex(lemin, str + i + 1);
-	
 	(*lemin)->mass[index1][index2] = 1;
 	(*lemin)->mass[index2][index1] = 1;
 }
 
-
-int getindex(t_lemin **lemin, char *str)
+int		getindex(t_lemin **lemin, char *str)
 {
-	t_room *rooms;
-	int i;
+	t_room	*rooms;
+	int		i;
 
 	i = 0;
 	rooms = (*lemin)->rooms;
@@ -90,7 +88,7 @@ int getindex(t_lemin **lemin, char *str)
 	return (-1);
 }
 
-void antscheck(int fd, char **line, t_lemin **lemin)
+void	antscheck(int fd, char **line, t_lemin **lemin)
 {
 	while (specialgetnextlin(fd, &(*line), *lemin))
 	{
@@ -102,8 +100,8 @@ void antscheck(int fd, char **line, t_lemin **lemin)
 			exitlem(lemin, "ERROR: no ants\n", line);
 		else if ((*line)[0] == '#' && (*line)[1] == '#')
 			ft_strdel(line);
-		else if	(ft_isnb(*line) > 0)
-			break;
+		else if (ft_isnb(*line) > 0)
+			break ;
 		else
 			exitlem(lemin, "ERROR: no ants\n", line);
 		ft_strdel(line);
