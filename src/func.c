@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 11:11:25 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/11/02 15:30:10 by aguiller         ###   ########.fr       */
+/*   Updated: 2020/11/02 16:20:44 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ void	addconnect(t_lemin **lemin, char *str)
 	int index2;
 
 	i = 0;
+	index1 = -1;
+	index2 = -2;
 	while (str[i] && str[i] != '-')
 		i++;
 	index1 = getindex(lemin, str);
@@ -84,7 +86,8 @@ int		getindex(t_lemin **lemin, char *str)
 		i++;
 	while (rooms != NULL)
 	{
-		if (ft_strncmp(rooms->name, str, i) == 0)
+		if (specialen(rooms->name) == specialen(str) &&
+			ft_strncmp(rooms->name, str, i) == 0)
 			return (rooms->index);
 		rooms = rooms->next;
 	}

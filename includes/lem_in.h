@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 12:54:56 by andrew            #+#    #+#             */
-/*   Updated: 2020/11/02 15:16:17 by aguiller         ###   ########.fr       */
+/*   Updated: 2020/11/02 16:15:36 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,4 +189,5 @@ void			addspec(t_paths *head, t_paths *new);
 void			fileprint(t_lemin *lemin);
 void			push(t_path *current, t_lemin *lemin);
 void			clearsolution(t_lemin *lemin);
+int				specialen(char *str);
 #endif

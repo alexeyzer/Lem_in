@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 15:21:51 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/11/02 13:24:49 by aguiller         ###   ########.fr       */
+/*   Updated: 2020/11/02 16:20:06 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,14 @@ int		*massvisited(t_lemin *lemin)
 	}
 	massive[lemin->start->index] = 1;
 	return (massive);
+}
+
+int		specialen(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i] != '-' && str[i] != '\0')
+		i++;
+	return (i);
 }
