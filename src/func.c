@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 11:11:25 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/11/02 16:20:44 by aguiller         ###   ########.fr       */
+/*   Updated: 2020/11/02 19:24:17 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,8 @@ void	addconnect(t_lemin **lemin, char *str)
 	i = 0;
 	index1 = -1;
 	index2 = -2;
-	while (str[i] && str[i] != '-')
-		i++;
 	index1 = getindex(lemin, str);
+	i = roomspec(str, lemin, 0);
 	index2 = getindex(lemin, str + i + 1);
 	if ((*lemin)->mass[index1][index2] == 1 ||
 		(*lemin)->mass[index2][index1] == 1)
@@ -79,11 +78,21 @@ int		getindex(t_lemin **lemin, char *str)
 {
 	t_room	*rooms;
 	int		i;
+	int		count;
 
 	i = 0;
-	rooms = (*lemin)->rooms;
-	while (str[i] && str[i] != '-')
+	count = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == '-')
+			count++;
 		i++;
+	}
+	rooms = (*lemin)->rooms;
+	if (count > 1 && ((i = roomspec(str, lemin, 0) > 1)))
+		i--;
+	else
+		i = specialen(str);
 	while (rooms != NULL)
 	{
 		if (specialen(rooms->name) == specialen(str) &&

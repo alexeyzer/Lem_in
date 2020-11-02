@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 16:57:06 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/11/02 16:19:03 by aguiller         ###   ########.fr       */
+/*   Updated: 2020/11/02 19:25:06 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,13 +95,10 @@ void	checkconnect(t_lemin **lemin, char **str)
 	char	*name1;
 	char	*name2;
 
-	i = 0;
-	while ((*str)[i] && (*str)[i] != '-')
-		i++;
+	i = roomspec(*str, lemin, 0);
 	name1 = ft_strsub(*str, 0, i);
 	i_start = ++i;
-	while ((*str)[i] && (*str)[i] != '\0')
-		i++;
+	i = i + roomspec(*str, lemin, i) - 1;
 	name2 = ft_strsub(*str, i_start, i);
 	if (isroom(lemin, name1) < 0 || isroom(lemin, name2) < 0)
 	{

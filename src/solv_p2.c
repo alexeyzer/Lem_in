@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 17:19:32 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/11/02 13:21:07 by aguiller         ###   ########.fr       */
+/*   Updated: 2020/11/02 19:19:20 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,13 @@ t_pathtosolve	*createpathtosolve(int index, t_queue *queue)
 }
 
 int				createitog(int to, t_pathsolver *now, \
-t_queue **queue, t_lemin *lemin)
+t_queue **queue)
 {
 	if (now->pathtosolve != NULL)
 		cleanpathtosolve(&(now->pathtosolve));
 	now->len_path = 1;
 	now->path = createpath(now->index, to);
-	if (now->index == lemin->start->index)
-		scpecialclearqueue(queue);
+	scpecialclearqueue(queue);
 	return (0);
 }
 
@@ -73,7 +72,7 @@ void			addpaths(t_lemin *l, t_queue **queue, int *v, t_pathsolver *now)
 			&& v[i] == 0)
 		{
 			if (i == l->end->index)
-				run = createitog(i, now, queue, l);
+				run = createitog(i, now, queue);
 			else
 			{
 				v[i] = 1;
