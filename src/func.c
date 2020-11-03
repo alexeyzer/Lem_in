@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   func.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/21 11:11:25 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/11/02 19:24:17 by aguiller         ###   ########.fr       */
+/*   Updated: 2020/11/03 15:11:50 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ int		getindex(t_lemin **lemin, char *str)
 		i++;
 	}
 	rooms = (*lemin)->rooms;
-	if (count > 1 && ((i = roomspec(str, lemin, 0) > 1)))
-		i--;
+	if (count > 1 && ((i = roomspec(str, lemin, 0))))
+		i > 1 ? i-- : i;
 	else
 		i = specialen(str);
 	while (rooms != NULL)
