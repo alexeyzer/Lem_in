@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   findbest_p2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 16:00:40 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/11/02 15:29:31 by aguiller         ###   ########.fr       */
+/*   Updated: 2020/11/04 16:56:41 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ void	fileprint(t_lemin *lemin)
 		ft_printf("%s\n", now->line);
 		now = now->next;
 	}
+	if (lemin->fd != 0)
+		close(lemin->fd);
 }
 
 void	cleanpaths(t_paths *pathsheader)

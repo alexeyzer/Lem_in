@@ -6,13 +6,13 @@
 /*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 09:50:12 by andrew            #+#    #+#             */
-/*   Updated: 2020/11/03 15:13:57 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/11/04 16:56:09 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-t_lemin	*init_lemin(void)
+t_lemin	*init_lemin(int fd)
 {
 	t_lemin *lemin;
 
@@ -28,6 +28,7 @@ t_lemin	*init_lemin(void)
 	lemin->head_file = NULL;
 	lemin->connection = 0;
 	lemin->end = NULL;
+	lemin->fd = fd;
 	return (lemin);
 }
 
@@ -47,7 +48,7 @@ int		main(int argc, char **argv)
 			return (0);
 		}
 	}
-	lemin = init_lemin();
+	lemin = init_lemin(fd);
 	parsing(fd, &lemin);
 	isvalid(&lemin);
 	mainsolver(lemin);

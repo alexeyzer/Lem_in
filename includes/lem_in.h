@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 12:54:56 by andrew            #+#    #+#             */
-/*   Updated: 2020/11/02 19:19:33 by aguiller         ###   ########.fr       */
+/*   Updated: 2020/11/04 10:36:35 by alexzudin        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ typedef struct	s_lemin
 	double				ants_count;
 	struct s_file		*head_file;
 	int					rooms_count;
+	int					fd;
 }				t_lemin;
 
 t_path			*getlustpath(t_path *path);
