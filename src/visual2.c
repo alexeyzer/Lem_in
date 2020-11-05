@@ -6,7 +6,7 @@
 /*   By: andrew <andrew@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 15:02:23 by andrew            #+#    #+#             */
-/*   Updated: 2020/11/05 23:08:03 by andrew           ###   ########.fr       */
+/*   Updated: 2020/11/05 23:40:01 by andrew           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	print_path2(t_paths *paths, t_lemin *l)
 
 	while (paths)
 	{
-		ft_printf("|%4d  |", paths->ants_go);
+		ft_printf(BLUE"|%4d  |", paths->ants_go);
 		path = paths->headpath;
 		ft_printf("  %s->%s", find_room(l->rooms, path->from), \
 		find_room(l->rooms, path->to));
@@ -97,4 +97,5 @@ void	print_path(t_lemin *l)
 	print_line(len + 11, BLUE);
 	print_path2(l->head_solution->headpaths, l);
 	print_line(len + 11, BLUE);
+	ft_printf(NO);
 }

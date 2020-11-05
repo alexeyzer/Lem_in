@@ -6,7 +6,7 @@
 /*   By: andrew <andrew@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 22:06:07 by andrew            #+#    #+#             */
-/*   Updated: 2020/11/05 23:09:08 by andrew           ###   ########.fr       */
+/*   Updated: 2020/11/05 23:49:33 by andrew           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@ void	print_link(t_lemin *l)
 		return ;
 	}
 	ft_printf(GREEN" ****Links****\n"BLUE);
-	print_line(l->rooms_count * 3.6, BLUE);
+	print_line(5 + l->rooms_count * 3.1, BLUE);
 	ft_printf("|   ");
 	while (x < l->rooms_count)
 		ft_printf("|%2d", x++);
 	ft_printf("|\n");
-	print_line(l->rooms_count * 3.6, GREEN);
+	print_line(5 + l->rooms_count * 3.1, GREEN);
 	print_link2(l);
-	print_line(l->rooms_count * 3.6, BLUE);
+	print_line(5 + l->rooms_count * 3.1, BLUE);
 	ft_printf("\n"NO);
 }
