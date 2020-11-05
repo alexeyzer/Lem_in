@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: andrew <andrew@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 09:50:12 by andrew            #+#    #+#             */
-/*   Updated: 2020/11/04 16:56:09 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/11/05 23:11:25 by andrew           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,29 +32,35 @@ t_lemin	*init_lemin(int fd)
 	return (lemin);
 }
 
+void	error(void)
+{
+	ft_printf("ERROR: Invalid file\n");
+	exit(0);
+}
+
 int		main(int argc, char **argv)
 {
 	int		fd;
 	t_lemin	*lemin;
 
-	lemin = NULL;
 	fd = 0;
-	if (argc == 2 || argc == 3)
+	lemin = NULL;
+	if ((argc == 3 && argv[1][0] == '-' && argv[1][1] == 'p') || argc == 2)
 	{
-		fd = open(argv[1], O_RDONLY);
+		fd = open(argv[argc == 3 ? 2 : 1], O_RDONLY);
 		if (fd < 0)
-		{
-			ft_printf("ERROR: Invalid file\n");
-			return (0);
-		}
+			error();
 	}
+	else
+		exitlem(&lemin, argc == 1 ? "ERROR: no args\n" \
+		: "ERROR: too many args\n", NULL);
 	lemin = init_lemin(fd);
 	parsing(fd, &lemin);
 	isvalid(&lemin);
 	mainsolver(lemin);
-	fileprint(lemin);
-	if (argc == 3 && argv[2][0] == '-' && argv[2][1] == 'p')
+	if (argc == 3 && argv[1][0] == '-' && argv[1][1] == 'p')
 		visual(lemin);
+	fileprint(lemin);
 	ants_go(lemin);
 	exitlem(&lemin, NULL, NULL);
 	return (0);
@@ -95,22 +101,4 @@ void	c_clear(t_room *head)
 	ft_strdel(&(head->name));
 	free(head);
 	head = NULL;
-}
-
-void	visual(t_lemin *lemin)
-{
-	t_paths	*now;
-	int		i;
-
-	i = 1;
-	now = lemin->head_solution->headpaths;
-	while (now != NULL)
-	{
-		ft_printf("path %d\n", i);
-		ft_printf("ants to go %d\n", now->ants_go);
-		ft_printf("len of path %d\n", now->len_path);
-		printpath(now->headpath, lemin);
-		now = now->next;
-		i++;
-	}
 }

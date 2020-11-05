@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexzudin <alexzudin@student.42.fr>        +#+  +:+       +#+        */
+/*   By: andrew <andrew@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/02 12:54:56 by andrew            #+#    #+#             */
-/*   Updated: 2020/11/04 10:36:35 by alexzudin        ###   ########.fr       */
+/*   Updated: 2020/11/05 22:11:00 by andrew           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,26 @@
 # include "ft_printf.h"
 # include "libft.h"
 # include <fcntl.h>
+
+# define COLOR
+# define RED		"\033[31m"
+# define GREEN		"\033[32m"
+# define YELLOW		"\033[33m"
+# define BLUE		"\033[34m"
+# define PINK		"\033[35m"
+# define GRBL		"\033[36m"
+# define GREY		"\033[37m"
+# define NO			"\033[0m"
+
+typedef struct	s_visual
+{
+	int file;
+	int room;
+	int link;
+	int path;
+	int go;
+	int all;
+}				t_visual;
 
 typedef struct	s_room
 {
@@ -91,6 +111,11 @@ typedef struct	s_lemin
 	int					fd;
 }				t_lemin;
 
+void			print_line(int len, char *s);
+char			*find_room(t_room *room, int index);
+void			print_link(t_lemin *l);
+void			print_path(t_lemin *l);
+void			print_room(t_lemin *l);
 t_path			*getlustpath(t_path *path);
 int				is_path_clear(t_paths *paths);
 int				isallpathsclear(t_paths *headpaths);
