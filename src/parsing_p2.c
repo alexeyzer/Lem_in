@@ -6,7 +6,7 @@
 /*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/20 16:57:06 by alexzudin         #+#    #+#             */
-/*   Updated: 2020/11/02 19:25:06 by aguiller         ###   ########.fr       */
+/*   Updated: 2020/11/07 12:38:55 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	startend(int fd, t_lemin **lemin, char **str, int status)
 		if ((*str)[0] == '#' && (*str)[1] != '#')
 			ft_strdel(str);
 		else if (ft_strcmp(*str, "##start") == 0)
-			old_status = 1;
+			exitlem(lemin, "ERROR: command instead of room\n", str);
 		else if (ft_strcmp(*str, "##end") == 0)
-			old_status = 2;
+			exitlem(lemin, "ERROR: command instead of room\n", str);
 		else if ((*str)[0] == '#' && (*str)[1] == '#')
 			ft_strdel(str);
 		else

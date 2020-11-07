@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   visual.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: andrew <andrew@student.42.fr>              +#+  +:+       +#+        */
+/*   By: aguiller <aguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/05 15:02:23 by andrew            #+#    #+#             */
-/*   Updated: 2020/11/05 23:04:18 by andrew           ###   ########.fr       */
+/*   Updated: 2020/11/07 12:24:26 by aguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	visual(t_lemin *lemin)
 			break ;
 		if (!parseline(line, v))
 			flag = print(lemin, v);
-		if (flag)
+		if (line)
 			free(line);
 	}
 	free(v);
